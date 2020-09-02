@@ -1,29 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-
+import { PathService } from "./path.service";
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
+  arr: number[] = [];
 
-  arr: number[] = [110, 201];
-
-  get width(){
-    return 10;
-  }
-  fillColor="blue";
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private pathService: PathService) {}
+  
+  ngOnInit(){
+    this.arr = this.pathService.getArray();
   }
 
-  get changeColor() {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
-    return `rgb(${r}, ${g}, ${b})`;
+  changeColor(i): string {
+    return 'green';
   }
 
+  getDef(i: number): string {
+    return this.pathService.getDefinition(i);
+  }
 }

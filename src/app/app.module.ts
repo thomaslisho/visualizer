@@ -7,6 +7,7 @@ import { PlaygroundComponent } from './playground/playground.component';
 import { HeaderComponent } from './header/header.component';
 import { BoardComponent } from './playground/board/board.component';
 import { ControlsComponent } from './playground/controls/controls.component';
+import { PathService } from './playground/board/path.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { ControlsComponent } from './playground/controls/controls.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [PathService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 <div class="board-main">
-  <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M 25 190
+  <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" >
+    <!-- <path
+      d="M 330 330
              h 20
              v -180
              a3,3 0 0 0 -3,-3
@@ -9,21 +9,19 @@
              a3,3 0 0 0 -3,3
              z
              "
-      [attr.fill]=[changeColor]
+      [attr.fill]=[changeColor(1)]
+    /> -->
+    <path [attr.d]=[getDef(i)]
+             [attr.fill]=[changeColor(i)]
+     *ngFor="let item of arr; let i=index"/>
+    <!-- <path [attr.d]=[getDef(1)]
+             [attr.fill]=[changeColor(2)]
     />
-    <path
-      d="M 50 190
-             h 20
-             v -90
-             a3,3 0 0 0 -3,-3
-             h -14
-             a3,3 0 0 0 -3,3
-             z
-             "
-             [attr.fill]=[changeColor]
-    />
-    <path
-      d="M 75 190
+    <path [attr.d]=[getDef(2)]
+             [attr.fill]=[changeColor(2)]
+    /> -->
+    <!-- <path
+      d="M 450 330
              h 20
              v -10
              a3,3 0 0 0 -3,-3
@@ -31,19 +29,8 @@
              a3,3 0 0 0 -3,3
              z
              "
-             [attr.fill]=[changeColor]
-    />
-    <path
-      d="M 100 190
-             h 20
-             v -1
-             a3,3 0 0 0 -3,-3
-             h -14
-             a3,3 0 0 0 -3,3
-             z
-             "
-             [attr.fill]=[changeColor]
-    />
+             [attr.fill]=[changeColor(2)]
+    /> -->
   </svg>
 </div>
 <button >Click</button>

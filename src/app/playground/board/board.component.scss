@@ -1,7 +1,12 @@
 svg {
-    background-color:grey;
+    background-color:#161625;
+    width: 100%;
   //   border: 2px black solid;
   //   padding: 20px;
+}
+path:hover{
+  cursor: pointer;
+  fill: beige;
 }
 // .board-main {
 // }
