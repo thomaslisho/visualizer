@@ -9,7 +9,7 @@ export class BoardComponent implements OnInit {
   arr: number[] = [];
 
   constructor(private pathService: PathService) {}
-  
+
   ngOnInit(){
     this.arr = this.pathService.getArray();
   }
@@ -20,5 +20,9 @@ export class BoardComponent implements OnInit {
 
   getDef(i: number): string {
     return this.pathService.getDefinition(i);
+  }
+  onClick(){
+    this.pathService.addToArr();
+    this.arr = this.pathService.getArray();
   }
 }

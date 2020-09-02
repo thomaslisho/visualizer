@@ -1,36 +1,10 @@
 <div class="board-main">
-  <svg viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" >
-    <!-- <path
-      d="M 330 330
-             h 20
-             v -180
-             a3,3 0 0 0 -3,-3
-             h -14
-             a3,3 0 0 0 -3,3
-             z
-             "
-      [attr.fill]=[changeColor(1)]
-    /> -->
-    <path [attr.d]=[getDef(i)]
-             [attr.fill]=[changeColor(i)]
-     *ngFor="let item of arr; let i=index"/>
-    <!-- <path [attr.d]=[getDef(1)]
-             [attr.fill]=[changeColor(2)]
+  <svg viewBox="0 0 900 375" xmlns="http://www.w3.org/2000/svg">
+    <path
+      [attr.d]="[getDef(i)]"
+      [ngClass]="{ init: true, check: false, sorted: false, final: false }"
+      *ngFor="let item of arr; let i = index"
     />
-    <path [attr.d]=[getDef(2)]
-             [attr.fill]=[changeColor(2)]
-    /> -->
-    <!-- <path
-      d="M 450 330
-             h 20
-             v -10
-             a3,3 0 0 0 -3,-3
-             h -14
-             a3,3 0 0 0 -3,3
-             z
-             "
-             [attr.fill]=[changeColor(2)]
-    /> -->
   </svg>
 </div>
-<button >Click</button>
+<button (click)="onClick()">Click</button>
