@@ -1,7 +1,7 @@
 # Visualizer
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
-### Author: ##Lisho Thomas
+### Author: Lisho Thomas
 ### Date: Sep-1-2020
 
 ## Code scaffolding

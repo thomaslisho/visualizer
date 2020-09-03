@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PathService } from "./path.service";
+import { PlayService } from '../play.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -7,22 +9,23 @@ import { PathService } from "./path.service";
 })
 export class BoardComponent implements OnInit {
   arr: number[] = [];
-
-  constructor(private pathService: PathService) {}
+  playSubscription: Subscription;
+  constructor(private pathService: PathService, private playService: PlayService) {}
 
   ngOnInit(){
-    this.arr = this.pathService.getArray();
-  }
-
-  changeColor(i): string {
-    return 'green';
+    
+    this.playSubscription = this.playService.arrSubject.subscribe(data=>{
+      this.arr = data;
+    });
+    this.playService.addElements(50);
   }
 
   getDef(i: number): string {
     return this.pathService.getDefinition(i);
   }
+
   onClick(){
-    this.pathService.addToArr();
-    this.arr = this.pathService.getArray();
+    this.playService.addElements(10);
+    // this.arr = this.pathService.getArray();
   }
 }
