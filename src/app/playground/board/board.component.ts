@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PathService } from './path.service';
-import { DataService } from '../../data/data.service';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { PathService } from './path.service';
+import { DataService } from '../../data/data.service';
+
 import { ArrayElement } from '../../data/arrayelement';
 
 @Component({
@@ -23,8 +25,8 @@ export class BoardComponent implements OnInit {
       .pipe(
         map((data: ArrayElement[]) => {
           const arr: number[] = [];
-          for (let i = 0; i < data.length; i++) {
-            arr.push(data[i].getValue());
+          for (let element of data) {
+            arr.push(element.value);
           }
           return arr;
         })
@@ -36,5 +38,19 @@ export class BoardComponent implements OnInit {
 
   getDef(i: number): string {
     return this.pathService.getDefinition(i);
+  }
+
+  height(index: number) {
+    return this.dataService.getHeight(index);
+  }
+  clickMe() {
+    this.dataService.sort();
+  }
+
+  get color(): { base: string; top: string } {
+    return {
+      base: 'stop-color: rgb(255, 0, 0); stop-opacity: 1',
+      top: 'stop-color: yellow; stop-opacity: 1',
+    };
   }
 }

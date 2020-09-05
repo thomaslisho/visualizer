@@ -34,7 +34,7 @@ import { MatIconModule } from "@angular/material/icon";
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [PlayService,PathService ],
+  providers: [PlayService,PathService, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

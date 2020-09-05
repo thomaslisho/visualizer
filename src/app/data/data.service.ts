@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { ArrayElement } from "./arrayelement";
+import { Sort } from "./master";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
-
-  private masterArray: ArrayElement[];
-  arrSubject = new Subject<ArrayElement[]>();
+export class DataService extends Sort {
   
-  constructor() { 
+  constructor() {
+    super();
     this.masterArray=[];
   }
 
@@ -23,7 +21,7 @@ export class DataService {
   }
 
   getHeight(index: number){
-    return this.masterArray[index].getValue();
+    return this.masterArray[index].value;
   }
 
   get arraySize(){
@@ -33,4 +31,8 @@ export class DataService {
   emptyMaster(){
     this.masterArray=[];
   }
-}
+
+  sort(): Promise<void>{
+    return super.sort();
+  }
+} 
