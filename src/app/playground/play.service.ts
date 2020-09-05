@@ -1,41 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+
+import { DataService } from "../data/data.service";
 
 @Injectable()
 export class PlayService {
-  private masterArray: number[];
-  arrSubject = new Subject<number[]>();
+  private sizeInput: number;
 
   private viewportWidth: number = 850;
-  private viewPortHeight: number = 350;
-  private maxSize: number = 500;
+  private viewPortHeight: number = 320;
+  private maxSize: number = 200;
 
+  changeSize(input: number) {
+    this.sizeInput = input;
+    this.addElements();
+  }
 
-  constructor() {
-    this.masterArray = [];
+  constructor(private dataService: DataService) {
   }
 
   height(index: number) {
-    return this.masterArray[index];
+    return this.dataService.getHeight(index);
   }
 
   get size(): { max: number; current: number } {
-    return { max: this.maxSize, current: this.masterArray.length };
+    return { max: this.maxSize, current: this.dataService.arraySize };
   }
 
   get viewport(): { width: number; height: number } {
     return { width: this.viewportWidth, height: this.viewPortHeight };
   }
 
-  addElements(count: number) {
-    if(this.masterArray.length>=500)
-    return
-    for (var i = 0; i < count; i++) {
+  addElements() {
+    this.dataService.emptyMaster();
+    for (var i = 0; i < this.sizeInput; i++) {
       var k = Math.floor(
         Math.random() * (this.viewPortHeight - 30 - 10 + 1) + 10
       );
-      this.masterArray.push(k);
+      this.dataService.add(k);
     }
-    this.arrSubject.next(this.masterArray.slice());
+    this.dataService.announce();
   }
 }

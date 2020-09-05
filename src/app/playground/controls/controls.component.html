@@ -1,1 +1,13 @@
-<p>controls works!</p>
+<div class="toolbox">
+      <mat-slider
+        min="10"
+        max="200"
+        step="5"
+        color="primary"
+        [value]="minSize"
+        (input)="sliderChange($event)"
+        thumbLabel
+      ></mat-slider>
+    <h1>{{ minSize }}</h1>
+    <button type="button" (click)="lick()">Sort</button>
+</div>

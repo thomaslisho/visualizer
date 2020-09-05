@@ -9,10 +9,10 @@ export class PathService{
   private bottomPadding: number = 20;
   private leftPadding: number = 15;
 
-  private minGap: number = 0.59;
-  private maxGap: number = 2.5;
+  private minGap: number = 1;
+  private maxGap: number = 2.75;
 
-  private minRadius: number = 0.01;
+  private minRadius: number = 0.1;
   private maxRadius: number = 5;
 
 

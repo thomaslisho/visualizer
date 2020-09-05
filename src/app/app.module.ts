@@ -10,6 +10,12 @@ import { ControlsComponent } from './playground/controls/controls.component';
 
 import { PlayService } from "./playground/play.service";
 import { PathService } from './playground/board/path.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatSliderModule } from "@angular/material/slider";
+import { MatRippleModule } from "@angular/material/core";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -20,8 +26,13 @@ import { PathService } from './playground/board/path.service';
     ControlsComponent,
   ],
   imports: [
+    MatIconModule,
+    MatToolbarModule,
+    MatSliderModule,
+    MatRippleModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [PlayService,PathService ],
   bootstrap: [AppComponent]
