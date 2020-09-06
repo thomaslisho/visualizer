@@ -1,24 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { PathService } from './path.service';
 import { DataService } from '../../data/data.service';
 
-import { ArrayElement } from '../../data/arrayelement';
+import { ArrayElement, State } from '../../data/arrayelement';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
   arr: number[] = [];
   playSubscription: Subscription;
+  statSubscription: Subscription;
+  glowTime: number = 10000;
+
+  sorted: boolean;
+
   constructor(
     private pathService: PathService,
     private dataService: DataService
-  ) {}
+  ) {
+    this.sorted = false;
+  }
 
   ngOnInit() {
     this.playSubscription = this.dataService.arrSubject
@@ -34,6 +41,11 @@ export class BoardComponent implements OnInit {
       .subscribe((data) => {
         this.arr = data;
       });
+
+    this.statSubscription = this.dataService.statSubject.subscribe((data) => {
+      this.sorted = data;
+      setTimeout((_) => (this.sorted = false), this.glowTime);
+    });
   }
 
   getDef(i: number): string {
@@ -47,10 +59,12 @@ export class BoardComponent implements OnInit {
     this.dataService.sort();
   }
 
-  get color(): { base: string; top: string } {
-    return {
-      base: 'stop-color: rgb(255, 0, 0); stop-opacity: 1',
-      top: 'stop-color: yellow; stop-opacity: 1',
-    };
+  state(index: number) {
+    if (this.sorted) return State.Glow;
+    return this.dataService.getState(index);
+  }
+  ngOnDestroy(): void {
+    this.playSubscription.unsubscribe();
+    this.statSubscription.unsubscribe();
   }
 }

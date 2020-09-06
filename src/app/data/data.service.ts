@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ArrayElement } from "./arrayelement";
-import { Sort } from "./master";
+import { ArrayElement, State } from "./arrayelement";
+import { Sort } from "./master"; 
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,10 @@ export class DataService extends Sort {
 
   getHeight(index: number){
     return this.masterArray[index].value;
+  }
+
+  getState(index:number){
+    return this.masterArray[index].state;
   }
 
   get arraySize(){

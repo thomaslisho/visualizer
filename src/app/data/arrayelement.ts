@@ -1,7 +1,9 @@
 export enum State {
   Idle,
-  Intermediate,
+  IntermediateOne,
+  IntermediateTwo,
   Sorted,
+  Glow
 }
 export class ArrayElement {
   constructor(public value: number, public state = State.Idle) {}

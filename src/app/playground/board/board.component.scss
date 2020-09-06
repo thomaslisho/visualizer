@@ -7,7 +7,22 @@ path:hover {
   cursor: pointer;
   fill: beige;
 }
-.board-main{
+
+.board-main {
   width: 100%;
   height: auto;
+}
+
+.sorted {
+  fill: rgba(0, 184, 76, 0.719);
+}
+.idle {
+  fill: rgba(0, 178, 194, 0.911);
+}
+
+.inter-one {
+  fill: rgb(255, 0, 0);
+}
+.inter-two {
+  fill: #ffee00;
 }
