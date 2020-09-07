@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ArrayElement, State } from "./arrayelement";
-import { Sort } from "./master"; 
+import { ArrayElement } from "./arrayelement";
+import { Master } from "./master";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService extends Sort {
+export class DataService extends Master {
   
   constructor() {
     super();
@@ -36,7 +36,7 @@ export class DataService extends Sort {
     this.masterArray=[];
   }
 
-  sort(): Promise<void>{
+  sort(): void{
     return super.sort();
   }
 } 

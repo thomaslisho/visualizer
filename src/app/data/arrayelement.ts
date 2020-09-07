@@ -7,16 +7,10 @@ export enum State {
 }
 export class ArrayElement {
   constructor(public value: number, public state = State.Idle) {}
-  // getValue() {
-  //   return this.value;
-  // }
-  // getState() {
-  //   return this.state;
-  // }
-  // setValue(value) {
-  //   this.value = value;
-  // }
-  // setState(value) {
-  //   this.setState = value;
-  // }
+}
+export const colorLabels={
+  0:'rgba(7, 234, 255, 0.911)',
+  1:'rgb(255, 0, 0)',
+  2:'#ffee00',
+  3:'hsl(106, 100%, 51%)' 
 }

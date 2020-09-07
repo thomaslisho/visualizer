@@ -10,6 +10,7 @@ import { ControlsComponent } from './playground/controls/controls.component';
 
 import { PlayService } from "./playground/play.service";
 import { PathService } from './playground/board/path.service';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSliderModule } from "@angular/material/slider";

@@ -9,7 +9,7 @@ import { PlayService } from '../play.service';
 export class ControlsComponent implements OnInit {
   constructor(private playServiec: PlayService) {}
 
-  minSize = 100;
+  minSize = 150;
   panelOpenState: boolean;
   ngOnInit(): void {
     this.playServiec.changeSize(this.minSize);
