@@ -1,13 +1,39 @@
 <div class="toolbox">
-      <mat-slider
-        min="10"
-        max="200"
-        step="1"
-        color="primary"
-        [value]="minSize"
-        (input)="sliderChange($event)"
-        thumbLabel
-      ></mat-slider>
-    <h1>{{ minSize }}</h1>
-    <button type="button" (click)="lick()">Sort</button>
+  <mat-divider></mat-divider>
+  <div class="slider">
+    <span class="material-icons"> equalizer </span>
+    <mat-slider
+      min="10"
+      max="200"
+      step="1"
+      color="accent"
+      [value]="minSize"
+      (input)="sliderChange($event)"
+      thumbLabel
+      style="width: 500px"
+    ></mat-slider>
+  </div>
+  <mat-divider [vertical]="true"> </mat-divider>
+
+  <!-- <mat-slider vertical min="1" max="3" step="1" color="primary"></mat-slider> -->
+  <mat-accordion>
+    <mat-expansion-panel
+      [expanded]="panelOpenState"
+      (opened)="onChange(sortingMethod)"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> {{ sortingMethod.name }} </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list *ngFor="let item of sortingMethods">
+        <mat-divider></mat-divider>
+        <a (click)="onChange(item)" mat-list-item>
+          <span mat-line>{{ item.name }}</span>
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <button mat-button class="play" (click)="play()">
+    <span class="material-icons"> play_arrow </span>
+  </button>
+  <h1>{{ minSize }}</h1>
 </div>

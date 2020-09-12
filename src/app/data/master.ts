@@ -1,12 +1,10 @@
-import { Subject, merge } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ArrayElement, State } from './arrayelement';
-import { min } from 'rxjs/operators';
 
 export class Master {
   protected masterArray: ArrayElement[];
   arrSubject = new Subject<ArrayElement[]>();
   statSubject = new Subject<boolean>();
-  sorted: boolean;
 
   get delay(): number {
     const delay = 1000 / this.masterArray.length;
@@ -15,18 +13,70 @@ export class Master {
 
   constructor() {
     this.masterArray = [];
-    this.sorted = true;
   }
 
-  protected sleep(): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, this.delay));
-  }
-
-  protected sort() {
+  protected sort(sortingMethod: string) {
+    switch (sortingMethod) {
+      case sortingMethods[0].value:
+        this.bubbleSort();
+        break;
+      case sortingMethods[1].value:
+        this.selectionSort();
+        break;
+      case sortingMethods[2].value:
+        this.insertionSort();
+        break;
+      case sortingMethods[3].value:
+        this.quickSort(0, this.masterArray.length - 1);
+        break;
+      case sortingMethods[4].value:
+        this.mergeSort(0, this.masterArray.length - 1);
+        break;
+      case sortingMethods[5].value:
+        this.heapSort();
+        break;
+      default:
+        console.log('Error Occured!')
+        break;
+    }
     // this.heapSort();
     // this.selectionSort();
     // this.quickSort(0, this.masterArray.length - 1);
-    this.mergeSort(0, this.masterArray.length - 1);
+    // this.mergeSort(0, this.masterArray.length - 1);
+    // this.heapSort();
+  }
+
+  private sleep(): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, this.delay));
+  }
+  private async heapSort() {
+    let n = this.masterArray.length;
+    for (let i = n / 2 - 1; i >= 0; i--) await this.heapify(n, i);
+    for (let i = n - 1; i > 0; i--) {
+      await this.swap(0, i);
+      await this.sleep().then((_) => {
+        this.masterArray[i].state = State.Sorted;
+        this.arrSubject.next(this.masterArray);
+      });
+      await this.heapify(i, 0);
+    }
+    await this.sleep().then((_) => {
+      this.masterArray[0].state = State.Sorted;
+      this.arrSubject.next(this.masterArray);
+    });
+  }
+  async heapify(n: number, i: number) {
+    let largest = i,
+      l = 2 * i + 1,
+      r = 2 * i + 2;
+    if (l < n && this.masterArray[l].value > this.masterArray[largest].value)
+      largest = l;
+    if (r < n && this.masterArray[r].value > this.masterArray[largest].value)
+      largest = r;
+    if (largest != i) {
+      await this.swap(i, largest);
+      await this.heapify(n, largest);
+    }
   }
 
   async mergeSort(left: number, right: number) {
@@ -69,7 +119,10 @@ export class Master {
         });
         j++;
       }
-      this.masterArray[k].state = State.Sorted;
+      this.masterArray[k].state =
+        right - left === this.masterArray.length - 1
+          ? State.Sorted
+          : State.Idle;
       k++;
     }
     while (i < n1) {
@@ -77,7 +130,10 @@ export class Master {
       this.masterArray[k].state = State.IntermediateOne;
       await this.sleep().then((_) => {
         this.arrSubject.next(this.masterArray);
-        this.masterArray[k].state = State.Sorted;
+        this.masterArray[k].state =
+          right - left === this.masterArray.length - 1
+            ? State.Sorted
+            : State.Idle;
       });
       i++;
       k++;
@@ -87,7 +143,10 @@ export class Master {
       this.masterArray[k].state = State.IntermediateTwo;
       await this.sleep().then((_) => {
         this.arrSubject.next(this.masterArray);
-        this.masterArray[k].state = State.Sorted;
+        this.masterArray[k].state =
+          right - left === this.masterArray.length - 1
+            ? State.Sorted
+            : State.Idle;
       });
       j++;
       k++;
@@ -249,13 +308,14 @@ export class Master {
       this.masterArray[this.masterArray.length - (i + 1)].state = State.Sorted;
     }
   }
+  // this.statSubject.next(true);
 }
 
-export enum Sorting {
-  Bubble,
-  Selection,
-  Insertion,
-  Quick,
-  Merge,
-  Heap,
-}
+export const sortingMethods: { name: string; value: string }[] = [
+  { value: 'bubble', name: 'Bubble Sort' },
+  { value: 'selection', name: 'Selection Sort' },
+  { value: 'insertion', name: 'Insertion Sort' },
+  { value: 'quick', name: 'Quick Sort' },
+  { value: 'merge', name: 'Merge Sort' },
+  { value: 'heap', name: 'Heap Sort' },
+].slice();

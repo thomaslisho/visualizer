@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ArrayElement } from "./arrayelement";
-import { Master } from "./master";
+import { Master, sortingMethods } from "./master";
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,10 @@ export class DataService extends Master {
     this.masterArray=[];
   }
 
-  sort(): void{
-    return super.sort();
+  sort(sortingMethod: string): void{
+    return super.sort(sortingMethod);
   }
-} 
+  get sorting(){
+    return sortingMethods;
+  }
+}
