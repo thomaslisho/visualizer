@@ -1,15 +1,10 @@
-mat-slider {
-  padding: 10px;
-}
 .slider {
-  // width: 100%;
   transform: scale(1.1);
-  // flex-basis: 12%;
-  margin: 30px;
+  margin: 0 3vw;
 
   span {
     transform: scale(2);
-    margin: 10px;
+    margin: 20px;
   }
 }
 .play {
@@ -18,7 +13,6 @@ mat-slider {
   height: 75px;
   color: rgb(255, 0, 64);
   border-radius: 50%;
-  margin: 10px;
   outline-width: 0;
   span {
     transform: scale(2);
@@ -35,7 +29,15 @@ mat-slider:hover {
   align-items: baseline;
   align-content: center;
 }
+ngx-gauge{
+  position: relative;
+  left: 1vw;
+  top: 2vh;
+}
 mat-button-toggle {
   background-color: blue;
   color: white;
+}
+mat-card{
+  margin: 0 2rem;
 }

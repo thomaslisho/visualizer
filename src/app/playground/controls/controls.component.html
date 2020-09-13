@@ -1,46 +1,64 @@
-<div class="toolbox">
-  <button
-    mat-button
-    class="play"
-    (click)="play()"
-    [disabled]="sortingState == 1"
-  >
-    <span class="material-icons" *ngIf="sortingState == 0 || sortingState == 2">
-      play_arrow
-    </span>
-    <span class="material-icons" *ngIf="sortingState == 1"> stop </span>
-  </button>
-  <div class="slider">
-    <span class="material-icons"> equalizer </span>
-    <mat-slider
-      min="10"
-      max="200"
-      step="1"
-      color="warn"
-      [value]="minSize"
-      (input)="valueSliderChange($event)"
-      [disabled]="sortingState == 1"
-      thumbLabel
-      style="width: 20vw"
-    ></mat-slider>
-  </div>
-  <mat-accordion>
-    <mat-expansion-panel
-      [expanded]="panelOpenState"
-      (opened)="onChange(sortingMethod)"
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-title style="font-size: larger">
-          {{ sortingMethod.name }}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-nav-list *ngFor="let item of sortingMethods">
-        <mat-divider></mat-divider>
-        <a (click)="onChange(item)" mat-list-item>
-          <span mat-line>{{ item.name }}</span>
-        </a>
-      </mat-nav-list>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <h1>{{ minSize }}</h1>
-</div>
+<mat-card>
+  <mat-card-title>
+    <div class="toolbox">
+      <button
+        mat-button
+        class="play"
+        (click)="play()"
+        [disabled]="sortingState == 1"
+      >
+        <span
+          class="material-icons"
+          *ngIf="sortingState == 0 || sortingState == 2"
+        >
+          play_arrow
+        </span>
+        <span class="material-icons" *ngIf="sortingState == 1"> stop </span>
+      </button>
+      <div class="slider">
+        <span class="material-icons"> equalizer </span>
+        <mat-slider
+          min="10"
+          max="200"
+          step="1"
+          color="warn"
+          [value]="minSize"
+          (input)="valueSliderChange($event)"
+          [disabled]="sortingState == 1"
+          thumbLabel
+          style="width: 20vw"
+        ></mat-slider>
+      </div>
+      <mat-accordion>
+        <mat-expansion-panel
+          [expanded]="panelOpenState"
+          (opened)="onChange(sortingMethod)"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title style="font-size: larger">
+              {{ sortingMethod.name }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-nav-list *ngFor="let item of sortingMethods">
+            <mat-divider></mat-divider>
+            <a (click)="onChange(item)" mat-list-item>
+              <span mat-line>{{ item.name }}</span>
+            </a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <ngx-gauge
+        [value]="minSize"
+        size="90"
+        cap="round"
+        type="arch"
+        min="10"
+        max="200"
+        [thresholds]="thresholdConfig"
+        label="SIZE"
+        duration="1500"
+        animate="true"
+      ></ngx-gauge>
+    </div>
+  </mat-card-title>
+</mat-card>

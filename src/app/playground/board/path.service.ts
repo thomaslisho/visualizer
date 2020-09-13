@@ -6,7 +6,7 @@ import { PlayService } from '../play.service';
 })
 export class PathService{
 
-  private bottomPadding: number = 20;
+  private bottomPadding: number = 10;
   private leftPadding: number = 15;
 
   private minGap: number = 1;

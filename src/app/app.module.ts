@@ -17,10 +17,12 @@ import { MatSliderModule } from "@angular/material/slider";
 import { MatRippleModule } from "@angular/material/core";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
-import { MatDividerModule } from "@angular/material/divider";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatListModule } from "@angular/material/list";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatCardModule } from "@angular/material/card";
+
+import { NgxGaugeModule } from "ngx-gauge";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,10 +32,10 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     ControlsComponent,
   ],
   imports: [
-    MatProgressSpinnerModule,
+    MatCardModule,
+    NgxGaugeModule,
     MatListModule,
     MatExpansionModule,
-    MatDividerModule,
     MatIconModule,
     MatToolbarModule,
     MatSliderModule,

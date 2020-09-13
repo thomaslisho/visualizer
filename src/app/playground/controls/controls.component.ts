@@ -10,9 +10,14 @@ import { DataService } from 'src/app/data/data.service';
 export class ControlsComponent implements OnInit {
   sortingMethods: { name: string; value: string }[] = [];
   sortingMethod: { name: string; value: string };
-  minSize = 150;
+  minSize = 121;
   panelOpenState: boolean = false;
   sortingState: number;
+  thresholdConfig = {
+    '0': { color: 'green' },
+    '75': { color: 'orange' },
+    '150': { color: 'red' },
+  };
 
   constructor(
     private playService: PlayService,
@@ -32,6 +37,7 @@ export class ControlsComponent implements OnInit {
   }
 
   play() {
+    this.panelOpenState = false;
     if (
       this.sortingState == SortingStates.idle ||
       this.sortingState == SortingStates.end
@@ -48,7 +54,6 @@ export class ControlsComponent implements OnInit {
     this.sortingMethod = value;
     this.panelOpenState = !this.panelOpenState;
   }
-  
 }
 enum SortingStates {
   idle,
