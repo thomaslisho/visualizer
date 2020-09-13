@@ -4,7 +4,7 @@ import { ArrayElement, State } from './arrayelement';
 export class Master {
   protected masterArray: ArrayElement[];
   arrSubject = new Subject<ArrayElement[]>();
-  sortingSpeed:number = 1000;
+  sortingSpeed: number = 1000;
 
   get delay(): number {
     const delay = this.sortingSpeed / this.masterArray.length;
@@ -36,7 +36,7 @@ export class Master {
         await this.heapSort();
         break;
       default:
-        console.log('Error Occured!')
+        console.log('Error Occured!');
         break;
     }
   }
@@ -46,7 +46,7 @@ export class Master {
   }
   private async heapSort() {
     let n = this.masterArray.length;
-    for (let i = n / 2 - 1; i >= 0; i--) await this.heapify(n, i);
+    for (let i = Math.floor(n / (2 - 1)); i >= 0; i--) await this.heapify(n, i);
     for (let i = n - 1; i > 0; i--) {
       await this.swap(0, i);
       await this.sleep().then((_) => {
