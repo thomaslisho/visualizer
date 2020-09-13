@@ -7,18 +7,17 @@
           'idle': state(i) == 0,
           'inter-one': state(i) == 1,
           'inter-two': state(i) == 2,
-          'sorted': state(i) == 3,
-          'glow':state(i)==4
+          'sorted': state(i) == 3
         }"
       ></path>
       <title>{{ height(i) }}</title>
-      <animate
-        *ngIf="false"
+      <!-- <animate
+        *ngIf="sorted"
         attributeName="fill"
         values="red;yellow;green;red"
         dur="4s"
         repeatCount="indefinite"
-      />
+      /> -->
     </g>
   </svg>
 </div>

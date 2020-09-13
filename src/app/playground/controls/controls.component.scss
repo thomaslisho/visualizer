@@ -3,9 +3,9 @@ mat-slider {
 }
 .slider {
   // width: 100%;
-  transform: scale(1);
+  transform: scale(1.1);
   // flex-basis: 12%;
-  margin: 20px;
+  margin: 30px;
 
   span {
     transform: scale(2);
@@ -14,11 +14,12 @@ mat-slider {
 }
 .play {
   background-color: rgb(18, 11, 58);
-  width: 100px;
-  height: 100px;
-  color: red;
+  width: 75px;
+  height: 75px;
+  color: rgb(255, 0, 64);
   border-radius: 50%;
   margin: 10px;
+  outline-width: 0;
   span {
     transform: scale(2);
   }

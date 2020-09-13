@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { PathService } from './path.service';
 import { DataService } from '../../data/data.service';
 
-import { ArrayElement } from '../../data/arrayelement';
+import { ArrayElement, State } from '../../data/arrayelement';
 
 @Component({
   selector: 'app-board',
@@ -16,7 +16,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   arr: number[] = [];
   playSubscription: Subscription;
   statSubscription: Subscription;
-
 
   constructor(
     private pathService: PathService,

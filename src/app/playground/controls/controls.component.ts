@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayService } from '../play.service';
 import { DataService } from 'src/app/data/data.service';
-import { sortingMethods } from 'src/app/data/master';
 
 @Component({
   selector: 'app-controls',
@@ -13,6 +12,7 @@ export class ControlsComponent implements OnInit {
   sortingMethod: { name: string; value: string };
   minSize = 150;
   panelOpenState: boolean = false;
+  sortingState: number;
 
   constructor(
     private playService: PlayService,
@@ -21,20 +21,37 @@ export class ControlsComponent implements OnInit {
 
   ngOnInit(): void {
     this.playService.changeSize(this.minSize);
+    this.sortingState = SortingStates.idle;
     this.sortingMethods = this.dataService.sorting;
     this.sortingMethod = this.sortingMethods[4];
   }
 
-  sliderChange(event) {
+  valueSliderChange(event) {
     this.minSize = event.value;
     this.playService.changeSize(event.value);
   }
 
   play() {
-    this.dataService.sort(this.sortingMethod.value);
+    if (
+      this.sortingState == SortingStates.idle ||
+      this.sortingState == SortingStates.end
+    ) {
+      this.sortingState = SortingStates.started;
+      this.dataService.sort(this.sortingMethod.value).then(() => {
+        this.sortingState = SortingStates.end;
+      });
+    } else {
+      this.sortingState = SortingStates.idle;
+    }
   }
   onChange(value: { name: string; value: string }) {
     this.sortingMethod = value;
     this.panelOpenState = !this.panelOpenState;
   }
+  
+}
+enum SortingStates {
+  idle,
+  started,
+  end,
 }

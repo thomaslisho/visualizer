@@ -4,10 +4,10 @@ import { ArrayElement, State } from './arrayelement';
 export class Master {
   protected masterArray: ArrayElement[];
   arrSubject = new Subject<ArrayElement[]>();
-  statSubject = new Subject<boolean>();
+  sortingSpeed:number = 1000;
 
   get delay(): number {
-    const delay = 1000 / this.masterArray.length;
+    const delay = this.sortingSpeed / this.masterArray.length;
     return delay < 20 ? 0 : delay;
   }
 
@@ -15,35 +15,30 @@ export class Master {
     this.masterArray = [];
   }
 
-  protected sort(sortingMethod: string) {
+  protected async sort(sortingMethod: string) {
     switch (sortingMethod) {
       case sortingMethods[0].value:
-        this.bubbleSort();
+        await this.bubbleSort();
         break;
       case sortingMethods[1].value:
-        this.selectionSort();
+        await this.selectionSort();
         break;
       case sortingMethods[2].value:
-        this.insertionSort();
+        await this.insertionSort();
         break;
       case sortingMethods[3].value:
-        this.quickSort(0, this.masterArray.length - 1);
+        await this.quickSort(0, this.masterArray.length - 1);
         break;
       case sortingMethods[4].value:
-        this.mergeSort(0, this.masterArray.length - 1);
+        await this.mergeSort(0, this.masterArray.length - 1);
         break;
       case sortingMethods[5].value:
-        this.heapSort();
+        await this.heapSort();
         break;
       default:
         console.log('Error Occured!')
         break;
     }
-    // this.heapSort();
-    // this.selectionSort();
-    // this.quickSort(0, this.masterArray.length - 1);
-    // this.mergeSort(0, this.masterArray.length - 1);
-    // this.heapSort();
   }
 
   private sleep(): Promise<void> {
@@ -308,7 +303,6 @@ export class Master {
       this.masterArray[this.masterArray.length - (i + 1)].state = State.Sorted;
     }
   }
-  // this.statSubject.next(true);
 }
 
 export const sortingMethods: { name: string; value: string }[] = [

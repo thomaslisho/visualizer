@@ -1,45 +1,45 @@
 import { Injectable } from '@angular/core';
-import { ArrayElement } from "./arrayelement";
-import { Master, sortingMethods } from "./master";
+import { ArrayElement } from './arrayelement';
+import { Master, sortingMethods } from './master';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService extends Master {
-  
   constructor() {
     super();
-    this.masterArray=[];
+    this.masterArray = [];
   }
 
-  add(element: number){
+  add(element: number) {
     this.masterArray.push(new ArrayElement(element));
   }
 
-  announce(){
+  announce() {
     this.arrSubject.next(this.masterArray.slice());
   }
 
-  getHeight(index: number){
+  getHeight(index: number) {
     return this.masterArray[index].value;
   }
 
-  getState(index:number){
+  getState(index: number) {
     return this.masterArray[index].state;
   }
 
-  get arraySize(){
+  get arraySize() {
     return this.masterArray.length;
   }
 
-  emptyMaster(){
-    this.masterArray=[];
+  emptyMaster() {
+    this.masterArray = [];
   }
 
-  sort(sortingMethod: string): void{
+  sort(sortingMethod: string): Promise<void> {
     return super.sort(sortingMethod);
   }
-  get sorting(){
+  get sorting() {
     return sortingMethods;
   }
+
 }

@@ -1,11 +1,12 @@
 svg {
-  background-color: #161625;
+  // background-color: #161625;
+  background-color: #ececff;
   width: 100%;
 }
 
 path:hover {
   cursor: pointer;
-  fill: beige;
+  fill: rgb(255, 33, 144);
 }
 
 .board-main {
@@ -14,7 +15,7 @@ path:hover {
 }
 
 .sorted {
-  fill: hsla(143, 100%, 51%, 0.657);
+  fill: hsla(130, 100%, 51%, 0.657);
 }
 .idle {
   fill: rgba(7, 32, 255, 0.911);
@@ -24,5 +25,5 @@ path:hover {
   fill: rgb(255, 0, 0);
 }
 .inter-two {
-  fill: #ffee00;
+  fill: #ffee00da;
 }
