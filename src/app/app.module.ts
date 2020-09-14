@@ -20,8 +20,13 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatListModule } from "@angular/material/list";
 import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
+import { MatTabsModule } from "@angular/material/tabs";
 
 import { NgxGaugeModule } from "ngx-gauge";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { EndorseComponent } from './endorse/endorse.component';
+import { CreateNewComponent } from './endorse/create-new/create-new.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +35,13 @@ import { NgxGaugeModule } from "ngx-gauge";
     HeaderComponent,
     BoardComponent,
     ControlsComponent,
+    PageNotFoundComponent,
+    EndorseComponent,
+    CreateNewComponent,
   ],
   imports: [
+    MatTabsModule,
+    MatButtonModule,
     MatCardModule,
     NgxGaugeModule,
     MatListModule,

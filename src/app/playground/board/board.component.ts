@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { PathService } from './path.service';
 import { DataService } from '../../data/data.service';
 
-import { ArrayElement, State } from '../../data/arrayelement';
+import { ArrayElement } from '../../data/arrayelement';
 
 @Component({
   selector: 'app-board',
@@ -15,7 +15,6 @@ import { ArrayElement, State } from '../../data/arrayelement';
 export class BoardComponent implements OnInit, OnDestroy {
   arr: number[] = [];
   playSubscription: Subscription;
-  statSubscription: Subscription;
 
   constructor(
     private pathService: PathService,
@@ -51,6 +50,5 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.playSubscription.unsubscribe();
-    this.statSubscription.unsubscribe();
   }
 }

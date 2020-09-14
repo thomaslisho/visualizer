@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem;
+}
+svg{
+    padding: 2rem;
+}
+h1{
+  font-size: 5rem;
+  color: rgb(115, 123, 131);
+}

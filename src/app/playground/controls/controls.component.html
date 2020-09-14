@@ -2,8 +2,8 @@
   <mat-card-title>
     <div class="toolbox">
       <button
-        mat-button
-        class="play"
+        mat-fab
+        color="warn"
         (click)="play()"
         [disabled]="sortingState == 1"
       >
@@ -35,7 +35,7 @@
           (opened)="onChange(sortingMethod)"
         >
           <mat-expansion-panel-header>
-            <mat-panel-title style="font-size: larger; color: blue;">
+            <mat-panel-title style="font-size: larger; color: blue">
               {{ sortingMethod.name }}
             </mat-panel-title>
           </mat-expansion-panel-header>

@@ -7,16 +7,14 @@
     margin: 20px;
   }
 }
-.play {
-  background-color: rgb(18, 11, 58);
-  width: 75px;
-  height: 75px;
-  color: rgb(255, 0, 64);
-  border-radius: 50%;
-  outline-width: 0;
-  span {
-    transform: scale(2);
-  }
+
+span {
+  transform: scale(2);
+}
+button{
+  position: relative;
+  top: -1vh;
+  transform: scale(1.4);
 }
 mat-slider:hover {
   cursor: grab;
