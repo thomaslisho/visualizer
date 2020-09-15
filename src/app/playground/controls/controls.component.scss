@@ -8,13 +8,14 @@
   }
 }
 
-span {
-  transform: scale(2);
-}
-button{
+button {
   position: relative;
   top: -1vh;
   transform: scale(1.4);
+
+  span {
+    transform: scale(1.4);
+  }
 }
 mat-slider:hover {
   cursor: grab;
@@ -27,7 +28,7 @@ mat-slider:hover {
   align-items: baseline;
   align-content: center;
 }
-ngx-gauge{
+ngx-gauge {
   position: relative;
   left: 1vw;
   top: 2vh;
@@ -36,6 +37,6 @@ mat-button-toggle {
   background-color: blue;
   color: white;
 }
-mat-card{
+mat-card {
   margin: 0 2rem;
 }
