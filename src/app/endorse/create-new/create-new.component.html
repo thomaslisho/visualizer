@@ -1,1 +1,71 @@
-<p>create-new works!</p>
+<mat-card>
+  <mat-card-title>
+    <img src="assets/img/original.png" class="logo" />
+    Post your valuable Comments
+  </mat-card-title>
+  <mat-card-content>
+    <div class="writer">
+      <img [src]="data['picture']" [alt]="data['name']" class="display-picture" />
+      <h1>{{ data["name"] }}</h1>
+    </div>
+    <form class="mat-form" [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Title for comment</mat-label>
+        <input
+          matInput
+          placeholder="Ex. Pizza"
+          name="title"
+          formControlName="title"
+        />
+        <mat-icon matSuffix>mode_edit</mat-icon>
+        <mat-error> Title is <strong>required</strong> </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Leave a comment</mat-label>
+        <textarea
+          matInput
+          mat-autosize="true"
+          placeholder="Ex. It makes me feel..."
+          name="comment"
+          formControlName="comment"
+          minRows="3"
+          maxRows="7"
+          [matAutosizeMinRows]="1"
+          [matAutosizeMaxRows]="3"
+        ></textarea>
+        <mat-icon matSuffix>comment</mat-icon>
+        <mat-error> Comment is <strong>required</strong> </mat-error>
+      </mat-form-field>
+      <div class="buttons">
+        <button
+          mat-fab
+          color="accent"
+          type="submit"
+          aria-label="Example icon button with a delete icon"
+          [disabled]="!enable"
+        >
+          <mat-icon>send</mat-icon>
+        </button>
+        <button
+          mat-fab
+          color="warn"
+          type="reset"
+          aria-label="Example icon button with a delete icon"
+          (click)="clear()"
+        >
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
+    </form>
+    <div class="terms">
+      <strong>Terms & Conditions</strong>
+      <h5>
+        The display picture and your name will be posted publically along with
+        the comments. The email address associated will be saved, which will further be
+        used as an ID for each comment. E-Mail address will not be available
+        publically in the site. The entire user data will be cleared in the occurance of any incedents.
+      </h5>
+    </div>
+  </mat-card-content>
+</mat-card>

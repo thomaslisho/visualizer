@@ -8,13 +8,7 @@ import { PlaygroundComponent } from './playground/playground.component';
 const routes: Routes = [
   { path: '', redirectTo: 'sorting', pathMatch: 'full' },
   { path: 'sorting', component: PlaygroundComponent },
-  {
-    path: 'endorse',
-    children: [
-      { path: '', component: EndorseComponent, pathMatch:'full' },
-      { path: 'create-new', component: CreateNewComponent },
-    ],
-  },
+  { path: 'endorse', component: EndorseComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 
