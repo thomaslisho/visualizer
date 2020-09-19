@@ -5,25 +5,32 @@
   <mat-divider></mat-divider>
   <mat-toolbar-row color="primary">
     <span>Comments & Suggestions</span>
+    <span class="toolbar-spacer"></span>
+    <span *ngIf="authService.userProfile$ | async as profile" color="primary">
+      Logged In as {{profile['name']}} 
+    </span>
   </mat-toolbar-row>
 </mat-toolbar>
 
 <div class="comment-list">
-  <mat-card class="example-card" *ngFor="let item of comments">
-    <mat-card-header>
-      <div
-        mat-card-avatar
-        class="example-header-image"
-        [ngStyle]="{ 'background-image': 'url(' + item.imgSrc + ')' }"
-      ></div>
-      <mat-card-title>{{ item.title }}</mat-card-title>
-      <mat-card-subtitle>{{ item.name }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{ item.comment }}</p>
-    </mat-card-content>
-    <mat-card-footer>{{ item.dateTime | date }}</mat-card-footer>
-  </mat-card>
+  <div class="comment"  *ngFor="let item of comments">
+    <img [src]="item.imgSrc" class="commenter-img" />
+    <mat-card class="comment-card">
+      <mat-card-header>
+        <mat-card-title>{{ item.title }}</mat-card-title>
+        <mat-card-subtitle>{{ item.name }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ item.comment }}</p>
+      </mat-card-content>
+      <mat-card-footer>
+        <span class="material-icons" style="padding: 2%;">
+          comment
+          </span>
+        <strong>{{ item.dateTime | date }}</strong>
+      </mat-card-footer>
+    </mat-card>
+  </div>
   <mat-divider></mat-divider>
 </div>
 

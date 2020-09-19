@@ -49,6 +49,8 @@ export class EndorseComponent implements OnInit, OnDestroy {
     if (this.isLoggedIn)
       this._bottomSheet.open(CreateNewComponent, {
         data: this.loginData,
+        // disableClose: true
+        
       });
     else this.authService.login('/endorse');
   }
