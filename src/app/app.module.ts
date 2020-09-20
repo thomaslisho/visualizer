@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
+import { ScrollingModule } from "@angular/cdk/scrolling";
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -35,6 +36,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 import { NgxGaugeModule } from 'ngx-gauge';
+import { CommentListComponent } from './endorse/comment-list/comment-list.component';
 
 const material = [
   MatInputModule,
@@ -61,8 +63,10 @@ const material = [
     PageNotFoundComponent,
     EndorseComponent,
     CreateNewComponent,
+    CommentListComponent,
   ],
   imports: [
+    ScrollingModule,
     material,
     NgxGaugeModule,
     HttpClientModule,

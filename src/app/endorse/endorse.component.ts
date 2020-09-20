@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { DataStorageService } from '../shared/data-storage.service';
 import { UserComment } from '../shared/Comment.model';
 
+
 @Component({
   selector: 'app-endorse',
   templateUrl: './endorse.component.html',
@@ -19,11 +20,9 @@ export class EndorseComponent implements OnInit, OnDestroy {
   ) {}
   private userProfileSubscription: Subscription;
   private loggedStatusSubscription: Subscription;
-  private commentsSubscription: Subscription;
 
   isLoggedIn: boolean;
   loginData: any;
-  comments: UserComment[];
 
   ngOnInit(): void {
     this.userProfileSubscription = this.authService.userProfile$.subscribe(
@@ -34,14 +33,10 @@ export class EndorseComponent implements OnInit, OnDestroy {
         );
       }
     );
-    this.commentsSubscription = this.dataStorageService.comments.subscribe(
-      (comments) => (this.comments = comments)
-    );
   }
   ngOnDestroy(): void {
     this.loggedStatusSubscription.unsubscribe();
     this.userProfileSubscription.unsubscribe();
-    this.commentsSubscription.unsubscribe();
   }
 
   logout() {
@@ -77,8 +72,5 @@ export class EndorseComponent implements OnInit, OnDestroy {
   findUserComment(): Promise<any> {
     return this.dataStorageService.findUserComment(this.loginData['sub']);
   }
-
-  deleteComment() {
-    this.dataStorageService.deleteComment('wc8Bt4qSUbluETJYPr2O');
-  }
+  
 }

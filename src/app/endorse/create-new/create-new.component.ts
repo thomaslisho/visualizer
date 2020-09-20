@@ -5,6 +5,7 @@ import {
   MAT_BOTTOM_SHEET_DATA,
 } from '@angular/material/bottom-sheet';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserComment } from 'src/app/shared/Comment.model';
 
 import { DataStorageService } from '../../shared/data-storage.service';
 
@@ -48,22 +49,25 @@ export class CreateNewComponent implements OnInit {
 
   onSubmit() {
     this._bottomSheetRef.dismiss();
-    this.dataStorageService
-      .createComment({
-        id: this.data['sub'],
-        name: this.data['name'],
-        email: this.data['email'],
-        imgSrc: this.data['picture'],
-        title: this.commentForm.value['title'],
-        comment: this.commentForm.value['comment'],
-        dateTime: Date.now(),
-      })
-      .then((_) => {
-        console.log(_);
-        this._snackbar.open('Thank you for your feedback!', 'Close', {
-          duration: 5000,
+    let userComment: UserComment = {
+      id: this.data['sub'],
+      name: this.data['name'],
+      email: this.data['email'],
+      imgSrc: this.data['picture'],
+      title: this.commentForm.value['title'],
+      comment: this.commentForm.value['comment'],
+    };
+    if (this.editingForm) {
+      this.dataStorageService.updateComment(userComment);
+    } else {
+      this.dataStorageService
+        .createComment({ ...userComment, dateTime: Date.now() })
+        .then((_) => {
+          this._snackbar.open('Thank you for your feedback!', 'Close', {
+            duration: 5000,
+          });
         });
-      });
+    }
   }
 
   clear() {
@@ -73,7 +77,7 @@ export class CreateNewComponent implements OnInit {
   deleteComment() {
     if (this.editingForm) {
       this.dataStorageService.deleteComment(this.data['sub']).then((data) => {
-        this._snackbar.open('Your Comment is deleted Successfully', 'Close', {
+        this._snackbar.open('Your Comment is deleted!', 'Close', {
           duration: 5000,
         });
       });

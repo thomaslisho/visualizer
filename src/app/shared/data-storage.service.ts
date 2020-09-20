@@ -65,4 +65,14 @@ export class DataStorageService {
       .doc<UserComment>(queryId)
       .delete();
   }
+  async updateComment(commentData: UserComment){
+    let queryId: string = '';
+    await this.findUserComment(commentData['id']).then((data) =>
+      data.docs.forEach((doc) => (queryId = doc.ref.id))
+    );
+    return this.angFireStr
+      .collection('comments')
+      .doc<UserComment>(queryId)
+      .update(commentData);
+  }
 }

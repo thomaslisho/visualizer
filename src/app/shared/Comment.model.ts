@@ -6,5 +6,5 @@ export interface UserComment {
   comment: string;
   imgSrc: string;
   email?: string;
-  dateTime: number;
+  dateTime?: number;
 }
