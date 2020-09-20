@@ -5,6 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+
 import { AppComponent } from './app.component';
 import { PlaygroundComponent } from './playground/playground.component';
 import { HeaderComponent } from './header/header.component';
@@ -28,6 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 import { NgxGaugeModule } from 'ngx-gauge';
 
@@ -43,6 +48,7 @@ const material = [
   MatToolbarModule,
   MatSliderModule,
   MatRippleModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({
@@ -64,6 +70,8 @@ const material = [
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [PlayService, PathService],
   bootstrap: [AppComponent],

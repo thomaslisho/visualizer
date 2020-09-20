@@ -7,13 +7,13 @@
     <span>Comments & Suggestions</span>
     <span class="toolbar-spacer"></span>
     <span *ngIf="authService.userProfile$ | async as profile" color="primary">
-      Logged In as {{profile['name']}} 
+      Hi {{ profile["name"] }}
     </span>
   </mat-toolbar-row>
 </mat-toolbar>
 
 <div class="comment-list">
-  <div class="comment"  *ngFor="let item of comments">
+  <div class="comment" *ngFor="let item of comments">
     <img [src]="item.imgSrc" class="commenter-img" />
     <mat-card class="comment-card">
       <mat-card-header>
@@ -24,9 +24,7 @@
         <p>{{ item.comment }}</p>
       </mat-card-content>
       <mat-card-footer>
-        <span class="material-icons" style="padding: 2%;">
-          comment
-          </span>
+        <span class="material-icons" style="padding: 2%"> comment </span>
         <strong>{{ item.dateTime | date }}</strong>
       </mat-card-footer>
     </mat-card>

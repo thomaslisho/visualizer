@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "visualizer-7839c": {
+      "hosting": {
+        "visualizer": [
+          "visualizer-7839c"
+        ]
+      }
+    }
+  }
+}

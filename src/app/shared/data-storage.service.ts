@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  DocumentData,
+  QuerySnapshot,
+} from '@angular/fire/firestore';
 
 import { UserComment } from './Comment.model';
 import { Observable } from 'rxjs';
@@ -9,40 +14,55 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DataStorageService {
-  constructor(private httpClient: HttpClient) {}
+  commentCollection: AngularFirestoreCollection<UserComment>;
+  comments: Observable<UserComment[]>;
 
-  createComment(
-    commentData: UserComment
-  ) {
-    return this.httpClient.post<UserComment>(
-      'https://visualizer-7839c.firebaseio.com/comments.json',
-      commentData
+  constructor(private angFireStr: AngularFirestore) {
+    this.commentCollection = this.angFireStr.collection<UserComment>(
+      'comments',
+      (ref) => ref.orderBy('dateTime', 'desc')
     );
-  }
 
-  getComments() {
-    return this.httpClient
-      .get<UserComment[]>(
-        'https://visualizer-7839c.firebaseio.com/comments.json'
-      )
-      .pipe(
-        map((responseData) => {
-          const postArray: UserComment[] = [];
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              postArray.push({
-                id: responseData[key].id,
-                name: responseData[key].name,
-                imgSrc: responseData[key].imgSrc,
-                comment: responseData[key].comment,
-                title: responseData[key].title,
-                key: key,
-                dateTime: responseData[key].dateTime,
-              });
+    this.comments = this.commentCollection
+      .snapshotChanges()
+      .pipe<UserComment[]>(
+        map((responseData): UserComment[] => {
+          return responseData.map(
+            (doc): UserComment => {
+              return {
+                key: doc.payload.doc.id,
+                id: doc.payload.doc.data()['id'],
+                comment: doc.payload.doc.data()['comment'],
+                name: doc.payload.doc.data()['name'],
+                imgSrc: doc.payload.doc.data()['imgSrc'],
+                title: doc.payload.doc.data()['title'],
+                dateTime: doc.payload.doc.data()['dateTime'],
+              };
             }
-          }
-          return postArray;
+          );
         })
       );
+  }
+
+  createComment(commentData: UserComment): Promise<any> {
+    return this.angFireStr.collection('comments').add(commentData);
+  }
+
+  findUserComment(key: string): Promise<QuerySnapshot<DocumentData>> {
+    return this.angFireStr
+      .collection('comments')
+      .ref.where('id', '==', key)
+      .get();
+  }
+
+  async deleteComment(id: string): Promise<void> {
+    let queryId: string = '';
+    await this.findUserComment(id).then((data) =>
+      data.docs.forEach((doc) => (queryId = doc.ref.id))
+    );
+    return this.angFireStr
+      .collection('comments')
+      .doc<UserComment>(queryId)
+      .delete();
   }
 }

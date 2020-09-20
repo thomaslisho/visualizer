@@ -1,11 +1,15 @@
 <mat-card>
   <mat-card-title>
     <img src="assets/img/original.png" class="logo" />
-    Post your valuable Comments
+    {{editingForm?'Edit': 'Post'}} your valuable Comments
   </mat-card-title>
   <mat-card-content>
     <div class="writer">
-      <img [src]="data['picture']" [alt]="data['name']" class="display-picture" />
+      <img
+        [src]="data['picture']"
+        [alt]="data['name']"
+        class="display-picture"
+      />
       <h1>{{ data["name"] }}</h1>
     </div>
     <form class="mat-form" [formGroup]="commentForm" (ngSubmit)="onSubmit()">
@@ -40,21 +44,21 @@
       <div class="buttons">
         <button
           mat-fab
-          color="accent"
+          [color]="editingForm?'primary':'accent'"
           type="submit"
-          aria-label="Example icon button with a delete icon"
-          [disabled]="!enable"
+          aria-label="Example icon button with a edit or send icon"
+          [disabled]="!formEnable"
         >
-          <mat-icon>send</mat-icon>
+          <mat-icon>{{editingForm?'edit':'send'}}</mat-icon>
         </button>
         <button
           mat-fab
           color="warn"
-          type="reset"
-          aria-label="Example icon button with a delete icon"
-          (click)="clear()"
+          [type]="editingForm?'button':'reset'"
+          aria-label="Example icon button with a delete or clearicon"
+          (click)="editingForm?deleteComment():clear()"
         >
-          <mat-icon>clear</mat-icon>
+          <mat-icon>{{editingForm?'delete':'clear'}}</mat-icon>
         </button>
       </div>
     </form>
@@ -62,9 +66,10 @@
       <strong>Terms & Conditions</strong>
       <h5>
         The display picture and your name will be posted publically along with
-        the comments. The email address associated will be saved, which will further be
-        used as an ID for each comment. E-Mail address will not be available
-        publically in the site. The entire user data will be cleared in the occurance of any incedents.
+        the comments. The email address associated will be saved, which will
+        further be used as an ID for each comment. E-Mail address will not be
+        available publically in the site. The entire user data will be cleared
+        in the occurance of any incedents.
       </h5>
     </div>
   </mat-card-content>
