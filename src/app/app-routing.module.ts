@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CreateNewComponent } from './endorse/create-new/create-new.component';
+
 import { EndorseComponent } from './endorse/endorse.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlaygroundComponent } from './playground/playground.component';
@@ -8,7 +8,7 @@ import { PlaygroundComponent } from './playground/playground.component';
 const routes: Routes = [
   { path: '', redirectTo: 'sorting', pathMatch: 'full' },
   { path: 'sorting', component: PlaygroundComponent },
-  { path: 'endorse', component: EndorseComponent },
+  { path: 'endorse', component:EndorseComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

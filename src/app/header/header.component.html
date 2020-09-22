@@ -9,7 +9,9 @@
     [opened]="(isHandset$ | async) === false"
   >
     <mat-toolbar color="accent">
-      <img src="assets/img/original.png" class="logo" />Visualizer
+      Visualizer
+      <span class="header-spacer"></span>
+      <img src="assets/img/original.png" class="logo" />
     </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['sorting']" [routerLinkActive]="'active'"
