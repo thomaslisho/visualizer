@@ -22,11 +22,11 @@ import { CreateNewComponent } from './endorse/create-new/create-new.component';
 // import { PlayService } from './playground/play.service';
 // import { PathService } from './playground/board/path.service';
 
-import { MatSliderModule } from '@angular/material/slider';
-import { MatRippleModule } from '@angular/material/core';
+// import { MatSliderModule } from '@angular/material/slider';
+// import { MatRippleModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { MatExpansionModule } from '@angular/material/expansion';
+// import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -41,7 +41,6 @@ import { CommentListComponent } from './endorse/comment-list/comment-list.compon
 import { DeleteConfirmationComponent } from './endorse/create-new//delete-confirmation/delete-confirmation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { AppMaterialModule } from "./app-material/app-material.module";
 import { PlaygroundModule } from "./playground/playground.module";
 
 const material = [
@@ -51,12 +50,8 @@ const material = [
   MatFormFieldModule,
   MatButtonModule,
   MatCardModule,
-  MatListModule,
-  MatExpansionModule,
   MatIconModule,
   MatToolbarModule,
-  MatSliderModule,
-  MatRippleModule,
   MatSnackBarModule,
 ];
 
