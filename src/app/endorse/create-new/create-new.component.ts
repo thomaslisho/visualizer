@@ -4,10 +4,13 @@ import {
   MatBottomSheetRef,
   MAT_BOTTOM_SHEET_DATA,
 } from '@angular/material/bottom-sheet';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 import { UserComment } from 'src/app/shared/Comment.model';
 
 import { DataStorageService } from '../../shared/data-storage.service';
+import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-create-new',
@@ -23,7 +26,8 @@ export class CreateNewComponent implements OnInit {
     private _bottomSheetRef: MatBottomSheetRef<CreateNewComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private _snackbar: MatSnackBar,
-    private dataStorageService: DataStorageService
+    private dataStorageService: DataStorageService,
+    private _dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -58,7 +62,11 @@ export class CreateNewComponent implements OnInit {
       comment: this.commentForm.value['comment'],
     };
     if (this.editingForm) {
-      this.dataStorageService.updateComment(userComment);
+      this.dataStorageService.updateComment(userComment).then((_) =>
+        this._snackbar.open('Your comment has been updated!', 'Close', {
+          duration: 5000,
+        })
+      );
     } else {
       this.dataStorageService
         .createComment({ ...userComment, dateTime: Date.now() })
@@ -75,15 +83,35 @@ export class CreateNewComponent implements OnInit {
   }
 
   deleteComment() {
+    this._bottomSheetRef.dismiss();
     if (this.editingForm) {
-      this.dataStorageService.deleteComment(this.data['sub']).then((data) => {
-        this._snackbar.open('Your Comment is deleted!', 'Close', {
-          duration: 5000,
-        });
+      this.openDialog().subscribe((confirmation) => {
+        if (confirmation) {
+          this.dataStorageService
+            .deleteComment(this.data['sub'])
+            .then((data) => {
+              this._snackbar.open('Your Comment is deleted!', 'Close', {
+                duration: 5000,
+              });
+            });
+        } else {
+          this._snackbar.open('Thank God, That was a close One!', 'Close', {
+            duration: 5000,
+          });
+        }
       });
     } else {
       console.log("You cannot delete a comment which hasn't yet created");
       return;
     }
+  }
+
+  openDialog(): Observable<any> {
+    return this._dialog
+      .open(DeleteConfirmationComponent, {
+        data: { name: this.data['name'] },
+        autoFocus: true,
+      })
+      .afterClosed();
   }
 }

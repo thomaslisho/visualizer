@@ -1,12 +1,34 @@
 .header-spacer {
   flex: 1 1 auto;
 }
-.active{
-    mat-icon{
-        color:rgb(255, 0, 0);
-        transform: scale(1.4);
-    }
+.active {
+  mat-icon {
+    color: rgb(255, 0, 0);
+    transform: scale(1.4);
+  }
 }
-.title{
-  font-size: 1.7rem; 
+.title {
+  font-size: 1.7rem;
+}
+.linkedIn {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+}
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.hidden{
+  display: none;
 }

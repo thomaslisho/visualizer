@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from "@angular/common/http";
-import { ScrollingModule } from "@angular/cdk/scrolling";
+import { HttpClientModule } from '@angular/common/http';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AppComponent } from './app.component';
 import { PlaygroundComponent } from './playground/playground.component';
@@ -33,12 +33,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { NgxGaugeModule } from 'ngx-gauge';
 import { CommentListComponent } from './endorse/comment-list/comment-list.component';
+import { DeleteConfirmationComponent } from './endorse/create-new//delete-confirmation/delete-confirmation.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 const material = [
+  MatDialogModule,
   MatInputModule,
   MatBottomSheetModule,
   MatFormFieldModule,
@@ -64,6 +69,7 @@ const material = [
     EndorseComponent,
     CreateNewComponent,
     CommentListComponent,
+    DeleteConfirmationComponent,
   ],
   imports: [
     ScrollingModule,
@@ -75,7 +81,13 @@ const material = [
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
   ],
   providers: [PlayService, PathService],
   bootstrap: [AppComponent],
