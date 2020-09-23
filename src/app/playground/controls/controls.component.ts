@@ -1,11 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayService } from '../play.service';
 import { DataService } from 'src/app/data/data.service';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-controls',
   templateUrl: './controls.component.html',
   styleUrls: ['./controls.component.scss'],
+  animations: [
+    trigger('playState', [
+      state('in', style({ transform: 'translateX(0)', opacity: 1 })),
+      transition('void=>*', [
+        style({ transform: 'translateX(-200%)', opacity: 0 }),
+        animate(1000),
+      ]),
+    ]),
+    trigger('sliderState', [
+      state('in', style({ transform: 'translateY(0)', opacity: 1 })),
+      transition('void=>*', [
+        style({ transform: 'translateY(-100%)', opacity: 0 }),
+        animate(1000),
+      ]),
+    ]),
+    trigger('meterState', [
+      state('in', style({ transform: 'translateX(0)', opacity: 1 })),
+      transition('void=>*', [
+        style({ transform: 'translateX(200%)', opacity: 0 }),
+        animate(1000),
+      ]),
+    ]),
+  ],
 })
 export class ControlsComponent implements OnInit {
   sortingMethods: { name: string; value: string }[] = [];
@@ -52,7 +82,7 @@ export class ControlsComponent implements OnInit {
   }
   onChange(value: { name: string; value: string }) {
     this.sortingMethod = value;
-    this.panelOpenState = !this.panelOpenState;
+    this.panelOpenState = true;
   }
 }
 enum SortingStates {
