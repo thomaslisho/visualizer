@@ -22,7 +22,7 @@ cdk-virtual-scroll-viewport {
 }
 @keyframes card-animation {
   from {
-    transform: scale(1.05);
+    transform: scale(1.01);
   }
   to {
     transform: scale(1);
@@ -60,6 +60,7 @@ mat-card-footer {
   animation-fill-mode: forwards;
   border-radius: 50%;
   outline-width: 2px;
+  
 }
 .comment {
   display: flex;

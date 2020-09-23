@@ -1,8 +1,8 @@
 <cdk-virtual-scroll-viewport itemSize="100">
     <div class="comment-list">
-      <div class="comment" *ngFor="let item of comments">
-        <img [src]="item.imgSrc.toString()" class="commenter-img" />
-        <mat-card class="comment-card">
+      <div class="comment" *ngFor="let item of comments" >
+        <img [src]="item.imgSrc.toString()" class="commenter-img" [@imageState] />
+        <mat-card class="comment-card" [@cardState]>
           <mat-card-header>
             <mat-card-title>{{ item.title }}</mat-card-title>
             <mat-card-subtitle>{{ item.name }} </mat-card-subtitle>

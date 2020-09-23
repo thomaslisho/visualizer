@@ -2,6 +2,7 @@
   <mat-card-title>
     <div class="toolbox">
       <button
+        [@playState]
         mat-fab
         color="warn"
         (click)="play()"
@@ -15,7 +16,7 @@
         </span>
         <span class="material-icons" *ngIf="sortingState == 1"> stop </span>
       </button>
-      <div class="slider">
+      <div class="slider" [@sliderState]>
         <span class="material-icons"> equalizer </span>
         <mat-slider
           min="10"
@@ -29,7 +30,7 @@
           style="width: 20vw"
         ></mat-slider>
       </div>
-      <mat-accordion>
+      <mat-accordion [@sliderState]>
         <mat-expansion-panel
           [expanded]="panelOpenState"
           (opened)="onChange(sortingMethod)"
@@ -48,6 +49,7 @@
         </mat-expansion-panel>
       </mat-accordion>
       <ngx-gauge
+        [@meterState]
         [value]="minSize"
         size="90"
         cap="round"

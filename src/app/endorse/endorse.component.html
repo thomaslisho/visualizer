@@ -9,7 +9,13 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <app-comment-list></app-comment-list>
-<button mat-fab color="primary" class="create" (click)="openBottomSheet()">
+<button
+  mat-fab
+  color="primary"
+  class="create"
+  (click)="openBottomSheet()"
+  [@loginButtonState]
+>
   <span class="material-icons"> add </span>
 </button>
 <button
@@ -17,6 +23,7 @@
   color="warn"
   *ngIf="isLoggedIn"
   class="logout"
+  [@logOutButtonState]
   (click)="logout()"
 >
   LogOut

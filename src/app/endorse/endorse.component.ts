@@ -4,13 +4,34 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { CreateNewComponent } from './create-new/create-new.component';
 import { Subscription } from 'rxjs';
 import { DataStorageService } from '../shared/data-storage.service';
-import { UserComment } from '../shared/Comment.model';
-
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-endorse',
   templateUrl: './endorse.component.html',
   styleUrls: ['./endorse.component.scss'],
+  animations: [
+    trigger('loginButtonState', [
+      state('in', style({ transform: 'translateY(0)', opacity:1 })),
+      transition('void=>*', [
+        style({ transform: 'translateY(200%)', opacity: 0 }),
+        animate(1000),
+      ]),
+    ]),
+    trigger('logOutButtonState', [
+      state('in', style({ transform: 'translateX(0)', opacity:1 })),
+      transition('void=>*', [
+        style({ transform: 'translateX(200%)', opacity: 0 }),
+        animate(1000),
+      ]),
+    ]),
+  ],
 })
 export class EndorseComponent implements OnInit, OnDestroy {
   constructor(
@@ -51,7 +72,7 @@ export class EndorseComponent implements OnInit, OnDestroy {
             ...bottomSheetData,
             userExists: !querySnapShot.empty,
           };
-          querySnapShot.forEach((doc:any) => {
+          querySnapShot.forEach((doc: any) => {
             bottomSheetData = {
               ...bottomSheetData,
               comment: doc.data()['comment'],
@@ -72,5 +93,4 @@ export class EndorseComponent implements OnInit, OnDestroy {
   findUserComment(): Promise<any> {
     return this.dataStorageService.findUserComment(this.loginData['sub']);
   }
-  
 }
