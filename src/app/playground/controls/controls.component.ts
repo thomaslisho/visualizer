@@ -25,7 +25,7 @@ import {
       state('in', style({ transform: 'translateY(0)', opacity: 1 })),
       transition('void=>*', [
         style({ transform: 'translateY(-100%)', opacity: 0 }),
-        animate(1000),
+        animate(800),
       ]),
     ]),
     trigger('meterState', [
@@ -82,7 +82,7 @@ export class ControlsComponent implements OnInit {
   }
   onChange(value: { name: string; value: string }) {
     this.sortingMethod = value;
-    this.panelOpenState = true;
+    this.panelOpenState = !this.panelOpenState;
   }
 }
 enum SortingStates {

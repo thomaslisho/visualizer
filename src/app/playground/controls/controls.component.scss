@@ -40,3 +40,27 @@ mat-button-toggle {
 mat-card {
   margin: 0 2rem;
 }
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  .toolbox {
+    flex-direction: column;
+    position: relative;
+    flex-flow: column-reverse;
+    align-items: center;
+    align-content: center;
+  }
+  button {
+    transform: scale(1);
+    span {
+      transform: scale(1.8);
+    }
+  }
+  ngx-gauge {
+    margin-bottom: 5vh;
+  }
+  .slider {
+    transform: scale(1.1);
+    span {
+      transform: scale(1);
+    }
+  }
+}

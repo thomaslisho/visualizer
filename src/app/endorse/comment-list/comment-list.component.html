@@ -1,29 +1,29 @@
 <cdk-virtual-scroll-viewport itemSize="100">
-    <div class="comment-list">
-      <div class="comment" *ngFor="let item of comments" >
-        <img [src]="item.imgSrc.toString()" class="commenter-img" [@imageState] />
-        <mat-card class="comment-card" [@cardState]>
-          <mat-card-header>
-            <mat-card-title>{{ item.title }}</mat-card-title>
-            <mat-card-subtitle>{{ item.name }} </mat-card-subtitle>
-            <img
-                [src]="
-                  item.id.includes('linkedin')
-                    ? 'assets/img/linkedin-logo.png'
-                    : 'assets/img/google-logo.png'
-                "
-                class="account-icon"
-            />
-          </mat-card-header>
-          <mat-card-content>
-            <p>{{ item.comment }}</p>
-          </mat-card-content>
-          <mat-card-footer>
-            <span class="material-icons" style="padding: 2%"> comment </span>
-            <strong>{{ item.dateTime | date: 'MMM d, y, h:mm a' }}</strong>
-          </mat-card-footer>
-        </mat-card>
-      </div>
-      <mat-divider></mat-divider>
+  <div class="comment-list">
+    <div class="comment" *ngFor="let item of comments">
+      <img [src]="item.imgSrc.toString()" class="commenter-img" [@imageState] />
+      <mat-card class="comment-card" [@cardState]>
+        <mat-card-header>
+          <img class="avatar" mat-card-avatar [src]="item.imgSrc.toString()" [alt]="item.name">
+          <mat-card-title>{{ item.title }}</mat-card-title>
+          <mat-card-subtitle>{{ item.name }} </mat-card-subtitle>
+          <img
+            [src]="
+              item.id.includes('linkedin')
+                ? 'assets/img/linkedin-logo.png'
+                : 'assets/img/google-logo.png'
+            "
+            class="account-icon"
+          />
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ item.comment }}</p>
+        </mat-card-content>
+        <mat-card-footer>
+          <span class="material-icons" style="padding: 2%"> comment </span>
+          <strong>{{ item.dateTime | date: "MMM d, y, h:mm a" }}</strong>
+        </mat-card-footer>
+      </mat-card>
     </div>
-  </cdk-virtual-scroll-viewport>
+  </div>
+</cdk-virtual-scroll-viewport>

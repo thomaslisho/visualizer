@@ -32,3 +32,9 @@
 .hidden{
   display: none;
 }
+@media only screen and (max-width: 768px) {
+  .active{
+    color: rgb(17, 0, 255);
+    background-color: rgba(228, 241, 253, 0.466);
+  }
+}

@@ -6,7 +6,14 @@ import { PathService } from './path.service';
 import { DataService } from '../../data/data.service';
 
 import { ArrayElement } from '../../data/arrayelement';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-board',
@@ -17,9 +24,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       state('in', style({ transform: 'translateY(0)', opacity: 1 })),
       transition('void=>*', [
         style({ transform: 'translateY(-50%)', opacity: 0 }),
-        animate(1100),
+        animate(1200),
       ]),
-    ]),]
+    ]),
+  ],
 })
 export class BoardComponent implements OnInit, OnDestroy {
   arr: number[] = [];

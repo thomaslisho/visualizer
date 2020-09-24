@@ -3,6 +3,28 @@ svg {
   background-color: #ececff;
   width: 100%;
 }
+@media only screen and (max-width: 768px) {
+  svg{
+    height: 50vh;
+    transform: scale(1.2, 1.8);
+  }
+}
+@media only screen and (orientation: landscape) and (max-width: 1268px){
+  svg{
+    transform: scale(1.2, 1);
+    height: 80vh;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1268px) {
+  svg{
+    height: 70vh;
+  }
+}
+@media only screen and (min-width: 1269px) and (max-width: 1668px) {
+  svg{
+    height: 75vh;
+  }
+}
 
 path:hover {
   cursor: pointer;

@@ -11,6 +11,9 @@ cdk-virtual-scroll-viewport {
     background-color: rgb(82, 4, 155);
   }
 }
+.avatar{
+  display: none;
+}
 .account-icon {
   height: 2rem;
   // width: 10%;
@@ -44,7 +47,7 @@ mat-card-footer {
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
-  margin: 1rem;
+  margin-bottom: 1rem;
 }
 .commenter-img {
   display: block;
@@ -60,7 +63,6 @@ mat-card-footer {
   animation-fill-mode: forwards;
   border-radius: 50%;
   outline-width: 2px;
-  
 }
 .comment {
   display: flex;
@@ -91,5 +93,58 @@ mat-card-footer {
 mat-card-footer {
   text-align: end;
   padding-right: 2%;
+  padding-bottom: 1%;
   color: rgb(128, 123, 123);
+}
+p {
+  font-size: 1rem;
+}
+@media only screen and (max-width: 768px) {
+  .comment-card {
+    min-width: 80vw;
+  }
+  .commenter-img {
+    display: none;
+  }
+  .comment-list {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+  .account-icon {
+    height: 1rem;
+    // width: 10%;
+    position: fixed;
+    right: 0;
+    margin: 1rem 1rem;
+    padding: 0.25rem;
+  }
+  .avatar{
+    display: inline;
+  }
+}
+@media only screen and (max-width: 1268px) {
+  .comment-card {
+    min-width: 80vw;
+  }
+  .comment-list {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+  .account-icon {
+    height: 1rem;
+    opacity: 0.75;
+    position: fixed;
+    right: 0;
+    margin: 1rem 1rem;
+    padding: 0.25rem;
+  }
+}
+@media only screen and (max-width: 868px) and (orientation: landscape) {
+  cdk-virtual-scroll-viewport{
+    height: 65vh;
+  } 
 }
