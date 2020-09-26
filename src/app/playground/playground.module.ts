@@ -11,7 +11,7 @@ import { ControlsComponent } from './controls/controls.component';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { LayoutModule } from '@angular/cdk/layout';
 
-import { AppMaterialModule } from "../shared/app-material.module";
+import { AppMaterialModule } from '../shared/app-material.module';
 
 @NgModule({
   declarations: [PlaygroundComponent, BoardComponent, ControlsComponent],
@@ -20,7 +20,7 @@ import { AppMaterialModule } from "../shared/app-material.module";
     CommonModule,
     NgxGaugeModule,
     LayoutModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [PlayService, PathService],
 })

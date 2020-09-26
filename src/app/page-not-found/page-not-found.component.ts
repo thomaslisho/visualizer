@@ -13,10 +13,16 @@ export class PageNotFoundComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .get('https://api.quotable.io/random')
+      .get<{
+        author: string;
+        content: string;
+        length: number;
+        tags: [string];
+        _id: string;
+      }>('https://api.quotable.io/random')
       .subscribe((data) => {
-        this.quote = data['content'];
-        this.author = data['author'];
+        this.quote = data.content;
+        this.author = data.author;
       });
   }
 }

@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
 
-import { DataService } from "../data/data.service";
+import { DataService } from '../data/data.service';
 
 @Injectable()
 export class PlayService {
   private sizeInput: number;
 
-  private viewportWidth: number = 850;
-  private viewPortHeight: number = 320;
-  private maxSize: number = 200;
+  private viewportWidth = 850;
+  private viewPortHeight = 320;
+  private maxSize = 200;
 
-  changeSize(input: number) {
+  changeSize(input: number): void {
     this.sizeInput = input;
     this.addElements();
   }
 
-  constructor(private dataService: DataService) {
-  }
+  constructor(private dataService: DataService) {}
 
-  height(index: number) {
+  height(index: number): number {
     return this.dataService.getHeight(index);
   }
 
@@ -30,10 +29,10 @@ export class PlayService {
     return { width: this.viewportWidth, height: this.viewPortHeight };
   }
 
-  addElements() {
+  addElements(): void {
     this.dataService.emptyMaster();
-    for (var i = 0; i < this.sizeInput; i++) {
-      var k = Math.floor(
+    for (let i = 0; i < this.sizeInput; i++) {
+      const k = Math.floor(
         Math.random() * (this.viewPortHeight - 30 - 10 + 1) + 10
       );
       this.dataService.add(k);

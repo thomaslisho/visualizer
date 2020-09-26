@@ -10,19 +10,23 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
+      map((result) => result.matches),
       shareReplay()
     );
-  constructor(private router: Router, private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   ngOnInit(): void {}
 
-  endorse() {
+  endorse(): void {
     this.router.navigate(['/endorse']);
   }
-  openLinkedInLisho() {
+  openLinkedInLisho(): void {
     window.open('https://www.linkedin.com/in/lisho-thomas/', '_blank');
   }
 }

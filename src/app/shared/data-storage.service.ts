@@ -31,12 +31,12 @@ export class DataStorageService {
             (doc): UserComment => {
               return {
                 key: doc.payload.doc.id,
-                id: doc.payload.doc.data()['id'],
-                comment: doc.payload.doc.data()['comment'],
-                name: doc.payload.doc.data()['name'],
-                imgSrc: doc.payload.doc.data()['imgSrc'],
-                title: doc.payload.doc.data()['title'],
-                dateTime: doc.payload.doc.data()['dateTime'],
+                id: doc.payload.doc.data().id,
+                comment: doc.payload.doc.data().comment,
+                name: doc.payload.doc.data().name,
+                imgSrc: doc.payload.doc.data().imgSrc,
+                title: doc.payload.doc.data().title,
+                dateTime: doc.payload.doc.data().dateTime,
               };
             }
           );
@@ -56,7 +56,7 @@ export class DataStorageService {
   }
 
   async deleteComment(id: string): Promise<void> {
-    let queryId: string = '';
+    let queryId = '';
     await this.findUserComment(id).then((data) =>
       data.docs.forEach((doc) => (queryId = doc.ref.id))
     );
@@ -65,9 +65,9 @@ export class DataStorageService {
       .doc<UserComment>(queryId)
       .delete();
   }
-  async updateComment(commentData: UserComment){
-    let queryId: string = '';
-    await this.findUserComment(commentData['id']).then((data) =>
+  async updateComment(commentData: UserComment): Promise<void> {
+    let queryId = '';
+    await this.findUserComment(commentData.id).then((data) =>
       data.docs.forEach((doc) => (queryId = doc.ref.id))
     );
     return this.angFireStr

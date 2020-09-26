@@ -11,35 +11,34 @@ export class DataService extends Master {
     this.masterArray = [];
   }
 
-  add(element: number) {
+  add(element: number): void {
     this.masterArray.push(new ArrayElement(element));
   }
 
-  announce() {
+  announce(): void {
     this.arrSubject.next(this.masterArray.slice());
   }
 
-  getHeight(index: number) {
+  getHeight(index: number): number {
     return this.masterArray[index].value;
   }
 
-  getState(index: number) {
+  getState(index: number): number {
     return this.masterArray[index].state;
   }
 
-  get arraySize() {
+  get arraySize(): number {
     return this.masterArray.length;
   }
 
-  emptyMaster() {
+  emptyMaster(): void {
     this.masterArray = [];
   }
 
   sort(sortingMethod: string): Promise<void> {
     return super.sort(sortingMethod);
   }
-  get sorting() {
+  get sorting(): { name: string; value: string }[] {
     return sortingMethods;
   }
-
 }

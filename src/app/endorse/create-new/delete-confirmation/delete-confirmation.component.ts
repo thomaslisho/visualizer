@@ -12,7 +12,7 @@ export class DeleteConfirmationComponent {
     @Inject(MAT_DIALOG_DATA) public data: { name: string }
   ) {}
 
-  confirm(confirmation: boolean = false){
+  confirm(confirmation: boolean = false): void {
     this.dialogRef.close(confirmation);
   }
 }

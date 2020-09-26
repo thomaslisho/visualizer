@@ -38,12 +38,12 @@ export class BoardComponent implements OnInit, OnDestroy {
     private dataService: DataService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.playSubscription = this.dataService.arrSubject
       .pipe(
         map((data: ArrayElement[]) => {
           const arr: number[] = [];
-          for (let element of data) {
+          for (const element of data) {
             arr.push(element.value);
           }
           return arr;
@@ -58,11 +58,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     return this.pathService.getDefinition(i);
   }
 
-  height(index: number) {
+  height(index: number): number {
     return this.dataService.getHeight(index);
   }
 
-  state(index: number) {
+  state(index: number): number {
     return this.dataService.getState(index);
   }
   ngOnDestroy(): void {

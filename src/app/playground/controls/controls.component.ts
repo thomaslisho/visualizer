@@ -41,12 +41,12 @@ export class ControlsComponent implements OnInit {
   sortingMethods: { name: string; value: string }[] = [];
   sortingMethod: { name: string; value: string };
   minSize = 121;
-  panelOpenState: boolean = false;
+  panelOpenState = false;
   sortingState: number;
   thresholdConfig = {
-    '0': { color: 'green' },
-    '75': { color: 'orange' },
-    '150': { color: 'red' },
+    0: { color: 'green' },
+    75: { color: 'orange' },
+    150: { color: 'red' },
   };
 
   constructor(
@@ -61,16 +61,16 @@ export class ControlsComponent implements OnInit {
     this.sortingMethod = this.sortingMethods[4];
   }
 
-  valueSliderChange(event) {
+  valueSliderChange(event): void {
     this.minSize = event.value;
     this.playService.changeSize(event.value);
   }
 
-  play() {
+  play(): void {
     this.panelOpenState = false;
     if (
-      this.sortingState == SortingStates.idle ||
-      this.sortingState == SortingStates.end
+      this.sortingState === SortingStates.idle ||
+      this.sortingState === SortingStates.end
     ) {
       this.sortingState = SortingStates.started;
       this.dataService.sort(this.sortingMethod.value).then(() => {
@@ -80,7 +80,7 @@ export class ControlsComponent implements OnInit {
       this.sortingState = SortingStates.idle;
     }
   }
-  onChange(value: { name: string; value: string }) {
+  onChange(value: { name: string; value: string }): void {
     this.sortingMethod = value;
     this.panelOpenState = !this.panelOpenState;
   }

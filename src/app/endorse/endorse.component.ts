@@ -18,14 +18,14 @@ import {
   styleUrls: ['./endorse.component.scss'],
   animations: [
     trigger('loginButtonState', [
-      state('in', style({ transform: 'translateY(0)', opacity:1 })),
+      state('in', style({ transform: 'translateY(0)', opacity: 1 })),
       transition('void=>*', [
         style({ transform: 'translateY(200%)', opacity: 0 }),
         animate(1000),
       ]),
     ]),
     trigger('logOutButtonState', [
-      state('in', style({ transform: 'translateX(0)', opacity:1 })),
+      state('in', style({ transform: 'translateX(0)', opacity: 1 })),
       transition('void=>*', [
         style({ transform: 'translateX(200%)', opacity: 0 }),
         animate(1000),
@@ -36,7 +36,7 @@ import {
 export class EndorseComponent implements OnInit, OnDestroy {
   constructor(
     public authService: AuthService,
-    private _bottomSheet: MatBottomSheet,
+    private bottomSheet: MatBottomSheet,
     private dataStorageService: DataStorageService
   ) {}
   private userProfileSubscription: Subscription;
@@ -50,7 +50,7 @@ export class EndorseComponent implements OnInit, OnDestroy {
       (data) => {
         this.loginData = data;
         this.loggedStatusSubscription = this.authService.isAuthenticated$.subscribe(
-          (data) => (this.isLoggedIn = data)
+          (isLoggedIn) => (this.isLoggedIn = isLoggedIn)
         );
       }
     );
@@ -60,7 +60,7 @@ export class EndorseComponent implements OnInit, OnDestroy {
     this.userProfileSubscription.unsubscribe();
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
   }
   openBottomSheet(): void {
@@ -75,22 +75,23 @@ export class EndorseComponent implements OnInit, OnDestroy {
           querySnapShot.forEach((doc: any) => {
             bottomSheetData = {
               ...bottomSheetData,
-              comment: doc.data()['comment'],
-              title: doc.data()['title'],
+              comment: doc.data().comment,
+              title: doc.data().title,
             };
           });
-          this._bottomSheet.open(CreateNewComponent, {
+          this.bottomSheet.open(CreateNewComponent, {
             data: bottomSheetData,
-            // disableClose: bottomSheetData['userExists']?false: true,
           });
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log('Error getting documents: ', error);
         });
-    } else this.authService.login('/endorse');
+    } else {
+      this.authService.login('/endorse');
+    }
   }
 
   findUserComment(): Promise<any> {
-    return this.dataStorageService.findUserComment(this.loginData['sub']);
+    return this.dataStorageService.findUserComment(this.loginData.sub);
   }
 }

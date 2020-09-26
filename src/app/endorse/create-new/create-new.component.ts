@@ -20,50 +20,50 @@ import { DeleteConfirmationComponent } from './delete-confirmation/delete-confir
 export class CreateNewComponent implements OnInit {
   commentForm: FormGroup;
   formEnable: boolean;
-  editingForm: boolean = false;
+  editingForm = false;
 
   constructor(
-    private _bottomSheetRef: MatBottomSheetRef<CreateNewComponent>,
+    private bottomSheetRef: MatBottomSheetRef<CreateNewComponent>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
-    private _snackbar: MatSnackBar,
+    private snackbar: MatSnackBar,
     private dataStorageService: DataStorageService,
-    private _dialog: MatDialog
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    if (this.data['userExists']) {
-      this.editingForm = this.data['userExists'];
+    if (this.data.userExists) {
+      this.editingForm = this.data.userExists;
       this.formEnable = true;
     }
     this.commentForm = new FormGroup({
       title: new FormControl(
-        this.data['userExists'] ? this.data['title'] : null,
+        this.data.userExists ? this.data.title : null,
         Validators.required
       ),
       comment: new FormControl(
-        this.data['userExists'] ? this.data['comment'] : null,
+        this.data.userExists ? this.data.comment : null,
         Validators.required
       ),
     });
 
     this.commentForm.statusChanges.subscribe((value) => {
-      this.formEnable = value == 'VALID';
+      this.formEnable = value === 'VALID';
     });
   }
 
-  onSubmit() {
-    this._bottomSheetRef.dismiss();
-    let userComment: UserComment = {
-      id: this.data['sub'],
-      name: this.data['name'],
-      email: this.data['email'],
-      imgSrc: this.data['picture'],
-      title: this.commentForm.value['title'],
-      comment: this.commentForm.value['comment'],
+  onSubmit(): void {
+    this.bottomSheetRef.dismiss();
+    const userComment: UserComment = {
+      id: this.data.sub,
+      name: this.data.name,
+      email: this.data.email,
+      imgSrc: this.data.picture,
+      title: this.commentForm.value.title,
+      comment: this.commentForm.value.comment,
     };
     if (this.editingForm) {
       this.dataStorageService.updateComment(userComment).then((_) =>
-        this._snackbar.open('Your comment has been updated!', 'Close', {
+        this.snackbar.open('Your comment has been updated!', 'Close', {
           duration: 5000,
         })
       );
@@ -71,45 +71,43 @@ export class CreateNewComponent implements OnInit {
       this.dataStorageService
         .createComment({ ...userComment, dateTime: Date.now() })
         .then((_) => {
-          this._snackbar.open('Thank you for your feedback!', 'Close', {
+          this.snackbar.open('Thank you for your feedback!', 'Close', {
             duration: 5000,
           });
         });
     }
   }
 
-  clear() {
-    setTimeout(() => this._bottomSheetRef.dismiss(), 100);
+  clear(): void {
+    setTimeout(() => this.bottomSheetRef.dismiss(), 100);
   }
 
-  deleteComment() {
-    this._bottomSheetRef.dismiss();
+  deleteComment(): void {
+    this.bottomSheetRef.dismiss();
     if (this.editingForm) {
       this.openDialog().subscribe((confirmation) => {
         if (confirmation) {
-          this.dataStorageService
-            .deleteComment(this.data['sub'])
-            .then((data) => {
-              this._snackbar.open('Your Comment is deleted!', 'Close', {
-                duration: 5000,
-              });
+          this.dataStorageService.deleteComment(this.data.sub).then((data) => {
+            this.snackbar.open('Your Comment is deleted!', 'Close', {
+              duration: 5000,
             });
+          });
         } else {
-          this._snackbar.open('Thank God, That was a close One!', 'Close', {
+          this.snackbar.open('Thank God, That was a close One!', 'Close', {
             duration: 5000,
           });
         }
       });
     } else {
-      console.log("You cannot delete a comment which hasn't yet created");
+      console.log('You cannot delete a comment which is not yet created');
       return;
     }
   }
 
   openDialog(): Observable<any> {
-    return this._dialog
+    return this.dialog
       .open(DeleteConfirmationComponent, {
-        data: { name: this.data['name'] },
+        data: { name: this.data.name },
         autoFocus: true,
       })
       .afterClosed();

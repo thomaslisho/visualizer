@@ -4,7 +4,7 @@ import { ArrayElement, State } from './arrayelement';
 export class Master {
   protected masterArray: ArrayElement[];
   arrSubject = new Subject<ArrayElement[]>();
-  sortingSpeed: number = 1000;
+  sortingSpeed = 1000;
 
   get delay(): number {
     const delay = this.sortingSpeed / this.masterArray.length;
@@ -15,7 +15,7 @@ export class Master {
     this.masterArray = [];
   }
 
-  protected async sort(sortingMethod: string) {
+  protected async sort(sortingMethod: string): Promise<void> {
     switch (sortingMethod) {
       case sortingMethods[0].value:
         await this.bubbleSort();
@@ -44,9 +44,11 @@ export class Master {
   private sleep(): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, this.delay));
   }
-  private async heapSort() {
-    let n = this.masterArray.length;
-    for (let i = Math.floor(n / (2 - 1)); i >= 0; i--) await this.heapify(n, i);
+  private async heapSort(): Promise<void> {
+    const n = this.masterArray.length;
+    for (let i = Math.floor(n / (2 - 1)); i >= 0; i--) {
+      await this.heapify(n, i);
+    }
     for (let i = n - 1; i > 0; i--) {
       await this.swap(0, i);
       await this.sleep().then((_) => {
@@ -60,21 +62,23 @@ export class Master {
       this.arrSubject.next(this.masterArray);
     });
   }
-  async heapify(n: number, i: number) {
-    let largest = i,
-      l = 2 * i + 1,
-      r = 2 * i + 2;
-    if (l < n && this.masterArray[l].value > this.masterArray[largest].value)
+  async heapify(n: number, i: number): Promise<void> {
+    let largest = i;
+    const l = 2 * i + 1;
+    const r = 2 * i + 2;
+    if (l < n && this.masterArray[l].value > this.masterArray[largest].value) {
       largest = l;
-    if (r < n && this.masterArray[r].value > this.masterArray[largest].value)
+    }
+    if (r < n && this.masterArray[r].value > this.masterArray[largest].value) {
       largest = r;
-    if (largest != i) {
+    }
+    if (largest !== i) {
       await this.swap(i, largest);
       await this.heapify(n, largest);
     }
   }
 
-  async mergeSort(left: number, right: number) {
+  async mergeSort(left: number, right: number): Promise<void> {
     if (left < right) {
       const mid = Math.floor((left + right) / 2);
       await this.mergeSort(left, mid);
@@ -83,16 +87,20 @@ export class Master {
     }
   }
 
-  async merge(left: number, mid: number, right: number) {
-    const n1 = mid - left + 1,
-      n2 = right - mid,
-      leftArray: ArrayElement[] = [],
-      rightArray: ArrayElement[] = [];
-    for (let i = 0; i < n1; i++) leftArray.push(this.masterArray[left + i]);
-    for (let j = 0; j < n2; j++) rightArray.push(this.masterArray[mid + 1 + j]);
-    let i = 0,
-      j = 0,
-      k = left;
+  async merge(left: number, mid: number, right: number): Promise<void> {
+    const n1 = mid - left + 1;
+    const n2 = right - mid;
+    const leftArray: ArrayElement[] = [];
+    const rightArray: ArrayElement[] = [];
+    for (let init = 0; init < n1; init++) {
+      leftArray.push(this.masterArray[left + init]);
+    }
+    for (let init = 0; init < n2; init++) {
+      rightArray.push(this.masterArray[mid + 1 + init]);
+    }
+    let i = 0;
+    let j = 0;
+    let k = left;
 
     while (i < n1 && j < n2) {
       await this.sleep().then((_) => {
@@ -151,10 +159,10 @@ export class Master {
     });
   }
 
-  private async swap(leftIndex: number, rightIndex: number) {
+  private async swap(leftIndex: number, rightIndex: number): Promise<void> {
     this.masterArray[leftIndex].state = State.IntermediateTwo;
     this.masterArray[rightIndex].state = State.IntermediateOne;
-    var temp = this.masterArray[leftIndex];
+    const temp = this.masterArray[leftIndex];
     this.masterArray[leftIndex] = this.masterArray[rightIndex];
     this.masterArray[rightIndex] = temp;
     await this.sleep().then((_) => {
@@ -164,10 +172,10 @@ export class Master {
       State.Idle;
   }
 
-  private async partition(left: number, right: number) {
-    var pivot = this.masterArray[Math.floor((right + left) / 2)], //middle element
-      i = left, //left pointer
-      j = right;
+  private async partition(left: number, right: number): Promise<number> {
+    const pivot = this.masterArray[Math.floor((right + left) / 2)]; // middle element
+    let i = left; // left pointer
+    let j = right;
     pivot.state = State.Sorted;
     await this.sleep().then((_) => {
       this.arrSubject.next(this.masterArray);
@@ -198,8 +206,8 @@ export class Master {
     return i;
   }
 
-  private async quickSort(left: number, right: number) {
-    var index: number;
+  private async quickSort(left: number, right: number): Promise<void> {
+    let index: number;
     if (this.masterArray.length > 1) {
       index = await this.partition(left, right);
 
@@ -220,9 +228,9 @@ export class Master {
     this.masterArray[left].state = State.Sorted;
   }
 
-  private async insertionSort() {
+  private async insertionSort(): Promise<void> {
     for (let i = 0; i < this.masterArray.length; i++) {
-      let key = this.masterArray[i].value;
+      const key = this.masterArray[i].value;
       let j = i - 1;
       while (j >= 0 && this.masterArray[j].value > key) {
         this.masterArray[j + 1].value = this.masterArray[j].value;
@@ -240,24 +248,27 @@ export class Master {
     }
   }
 
-  private async selectionSort() {
+  private async selectionSort(): Promise<void> {
     for (let i = 0; i < this.masterArray.length; i++) {
       let min = i;
       this.masterArray[min].state = State.IntermediateTwo;
-      for (let j = i + 1; j < this.masterArray.length; j++)
-        if (this.masterArray[j].value < this.masterArray[min].value) min = j;
+      for (let j = i + 1; j < this.masterArray.length; j++) {
+        if (this.masterArray[j].value < this.masterArray[min].value) {
+          min = j;
+        }
+      }
 
       await this.sleep().then((_) => {
         this.masterArray[min].state = State.IntermediateTwo;
         this.arrSubject.next(this.masterArray);
       });
-      if (min != i) {
+      if (min !== i) {
         await this.sleep().then((_) => {
           this.masterArray[i].state = this.masterArray[min].state =
             State.IntermediateOne;
           this.arrSubject.next(this.masterArray);
         });
-        let tmp = this.masterArray[i].value;
+        const tmp = this.masterArray[i].value;
         this.masterArray[i].value = this.masterArray[min].value;
         this.masterArray[min].value = tmp;
         await this.sleep().then((_) => {
@@ -274,7 +285,7 @@ export class Master {
     }
   }
 
-  private async bubbleSort() {
+  private async bubbleSort(): Promise<void> {
     for (let i = 0; i < this.masterArray.length; i++) {
       for (let j = 0; j < this.masterArray.length - i - 1; j++) {
         this.masterArray[j].state = State.IntermediateTwo;
@@ -283,7 +294,7 @@ export class Master {
           await this.sleep().then((_) => {
             this.arrSubject.next(this.masterArray);
           });
-          let temp = this.masterArray[j];
+          const temp = this.masterArray[j];
           this.masterArray[j] = this.masterArray[j + 1];
           this.masterArray[j + 1] = temp;
           this.masterArray[j].state = State.IntermediateOne;

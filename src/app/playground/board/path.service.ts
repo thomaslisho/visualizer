@@ -4,26 +4,23 @@ import { PlayService } from '../play.service';
 @Injectable({
   providedIn: 'root',
 })
-export class PathService{
+export class PathService {
+  private bottomPadding = 10;
+  private leftPadding = 15;
 
-  private bottomPadding: number = 10;
-  private leftPadding: number = 15;
+  private minGap = 1;
+  private maxGap = 2.75;
 
-  private minGap: number = 1;
-  private maxGap: number = 2.75;
+  private minRadius = 0.1;
+  private maxRadius = 5;
 
-  private minRadius: number = 0.1;
-  private maxRadius: number = 5;
+  constructor(private playService: PlayService) {}
 
-
-  constructor(private playService: PlayService) {
-  }
-
-  private get arraySize(){
+  private get arraySize(): { max: number; current: number } {
     return this.playService.size;
   }
 
-  private get viewport(){
+  private get viewport(): { width: number; height: number } {
     return this.playService.viewport;
   }
 
@@ -32,21 +29,25 @@ export class PathService{
   }
 
   private get radius(): number {
-    let result =
+    const result =
       this.maxRadius -
-      this.maxRadius * (this.arraySize.current / this.arraySize.max) * this.maxRadius;
+      this.maxRadius *
+        (this.arraySize.current / this.arraySize.max) *
+        this.maxRadius;
     return result < this.minRadius ? this.minRadius : result;
   }
 
   private get gap(): number {
-    let result =
+    const result =
       this.maxGap -
-      (this.maxGap - this.minGap) * (this.arraySize.current / this.arraySize.max);
+      (this.maxGap - this.minGap) *
+        (this.arraySize.current / this.arraySize.max);
     return result;
   }
 
   private get initPos(): number {
-    let result = this.viewport.width - this.arraySize.current * (this.width + this.gap);
+    const result =
+      this.viewport.width - this.arraySize.current * (this.width + this.gap);
     return this.leftPadding > result ? this.leftPadding : result / 2;
   }
 
