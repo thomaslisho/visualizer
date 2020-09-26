@@ -1,5 +1,5 @@
 <cdk-virtual-scroll-viewport itemSize="100">
-  <div class="comment-list">
+  <div class="comment-list" *ngIf="comments; else spinner">
     <div class="comment" *ngFor="let item of comments">
       <img [src]="item.imgSrc.toString()" class="commenter-img" [@imageState] />
       <mat-card class="comment-card" [@cardState]>
@@ -26,4 +26,7 @@
       </mat-card>
     </div>
   </div>
+  <ng-template #spinner>
+    <mat-spinner color="accent"></mat-spinner>
+  </ng-template>
 </cdk-virtual-scroll-viewport>

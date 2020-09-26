@@ -295,6 +295,12 @@
       />
     </path>
   </svg>
-  <h2>What doesn't kill you makes you STRONGER</h2>
+  <ng-container *ngIf="quote; else spinner">
+    <h2>{{quote}}<br><strong>{{author}}</strong></h2>  
+  </ng-container>
+  <ng-template #spinner>
+    <mat-spinner color="accent"> </mat-spinner>
+  </ng-template>
+  
   <button mat-raised-button color="primary" [routerLink]="['']" >Go Back to Sorting</button>
 </div>

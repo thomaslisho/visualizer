@@ -18,9 +18,29 @@ h1{
   h1{
     font-size: 4rem;
   }
+  .container{
+    margin: 3rem;
+  }
 }
 @media only screen and (max-width: 762px) {
   h1{
     font-size: 2.5rem;
   }
+  .container{
+    margin: 1rem;
+  }
+}
+h2{
+  // font-size: .5rem;
+  margin: 1rem;
+  // justify-content: end;
+  // align-items: flex-end;
+  text-align: justify;
+  color: rgb(115, 123, 131);
+}
+strong{
+  color: black;
+}
+mat-spinner{
+  margin: 1rem;
 }
