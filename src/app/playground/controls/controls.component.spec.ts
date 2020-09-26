@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { PlayService } from '../play.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ControlsComponent } from './controls.component';
 
 describe('ControlsComponent', () => {
@@ -8,9 +9,10 @@ describe('ControlsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ControlsComponent ]
-    })
-    .compileComponents();
+      declarations: [ControlsComponent],
+      imports: [BrowserAnimationsModule],
+      providers: [PlayService],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

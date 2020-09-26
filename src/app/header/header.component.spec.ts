@@ -1,7 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
+import { EndorseComponent } from '../endorse/endorse.component';
+import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { PlaygroundComponent } from '../playground/playground.component';
 
 import { HeaderComponent } from './header.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'sorting', pathMatch: 'full' },
+  { path: 'sorting', component: PlaygroundComponent },
+  { path: 'endorse', component: EndorseComponent },
+  { path: '**', component: PageNotFoundComponent },
+];
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -10,7 +20,7 @@ describe('HeaderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      providers: [RouterModule],
+      imports: [RouterModule.forRoot(routes)],
     }).compileComponents();
   }));
 
