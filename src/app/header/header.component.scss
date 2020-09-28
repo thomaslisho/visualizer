@@ -22,7 +22,12 @@
 .sidenav {
   width: 200px;
 }
-
+.like{
+  margin: 0 3rem;
+}
+.sort{
+  margin: 0 3rem; 
+}
 
 .mat-toolbar.mat-primary {
   position: sticky;
@@ -36,5 +41,11 @@
   .active{
     color: rgb(17, 0, 255);
     background-color: rgba(228, 241, 253, 0.466);
+  }
+  .like{
+    margin: 0 1rem;
+  }
+  .sort{
+    display: none; 
   }
 }

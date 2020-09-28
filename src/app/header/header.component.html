@@ -7,7 +7,7 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
-    [autoFocus]='false'
+    [autoFocus]="false"
   >
     <mat-toolbar color="accent">
       Visualizer
@@ -45,6 +45,14 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
+      <a
+        mat-icon-button
+        class="sort"
+        [routerLink]="['sorting']"
+        [routerLinkActive]="'active'"
+      >
+        <mat-icon> equalizer </mat-icon>
+      </a>
       <span class="header-spacer"></span>
       <a mat-button [routerLink]="['sorting']">
         <img src="assets/img/original.png" class="logo" />
@@ -53,6 +61,7 @@
       <span class="header-spacer"></span>
       <a
         mat-icon-button
+        class="like"
         [routerLink]="['endorse']"
         [routerLinkActive]="'active'"
       >

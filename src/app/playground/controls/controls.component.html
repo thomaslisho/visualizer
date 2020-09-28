@@ -34,6 +34,7 @@
         <mat-expansion-panel
           [expanded]="panelOpenState"
           (opened)="onChange(sortingMethod)"
+          [disabled]="sortingState == 1"
         >
           <mat-expansion-panel-header>
             <mat-panel-title style="font-size: larger; color: blue">

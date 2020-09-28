@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-title>
     <img src="assets/img/original.png" class="logo" />
-    {{editingForm?'Edit': 'Post'}} your Comments
+    {{ editingForm ? "Edit" : "Post" }} your Comments
   </mat-card-title>
   <mat-card-content>
     <div class="writer">
@@ -44,32 +44,32 @@
       <div class="buttons">
         <button
           mat-fab
-          [color]="editingForm?'primary':'accent'"
+          [color]="editingForm ? 'primary' : 'accent'"
           type="submit"
           aria-label="Example icon button with a edit or send icon"
           [disabled]="!formEnable"
         >
-          <mat-icon>{{editingForm?'edit':'send'}}</mat-icon>
+          <mat-icon>{{ editingForm ? "edit" : "send" }}</mat-icon>
         </button>
         <button
           mat-fab
           color="warn"
-          [type]="editingForm?'button':'reset'"
+          [type]="editingForm ? 'button' : 'reset'"
           aria-label="Example icon button with a delete or clearicon"
-          (click)="editingForm?deleteComment():clear()"
+          (click)="editingForm ? deleteComment() : clear()"
         >
-          <mat-icon>{{editingForm?'delete':'clear'}}</mat-icon>
+          <mat-icon>{{ editingForm ? "delete" : "clear" }}</mat-icon>
         </button>
       </div>
     </form>
     <div class="terms">
       <strong>Terms & Conditions</strong>
       <h5>
-        The display picture and your name will be posted publically along with
-        the comments. The email address associated will be saved, which will
-        further be used as an ID for each comment. E-Mail address will not be
-        available publically in the site. The entire user data will be cleared
-        in the occurance of any incedents.
+        The display picture and your name will be posted publicly along with the
+        comments. The email address associated will be saved, which will further
+        be used as an ID for each comment. The E-Mail addresses will not be
+        available publicly on the site. The entire user data will be cleared in
+        the occurrence of any incidents.
       </h5>
     </div>
   </mat-card-content>
